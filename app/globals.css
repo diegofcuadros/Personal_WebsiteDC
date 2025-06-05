@@ -1,0 +1,95 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Updated to use specific theme colors for background/foreground */
+    --background: 220 25% 98.6%; /* site-white: #F9FBFC */
+    --foreground: 210 79% 16%; /* deep-navy: #0B2447 */
+
+    --card: 220 25% 98.6%; /* site-white for card background in light mode */
+    --card-foreground: 210 79% 16%; /* deep-navy for card text in light mode */
+
+    --popover: 220 25% 98.6%; /* site-white for popover background in light mode */
+    --popover-foreground: 210 79% 16%; /* deep-navy for popover text in light mode */
+
+    --primary: 210 79% 16%; /* Deep Navy: #0B2447 */
+    --primary-foreground: 220 25% 98.6%; /* site-white: #F9FBFC */
+
+    --secondary: 193 100% 31%; /* Teal: #0085A1 */
+    --secondary-foreground: 220 25% 98.6%; /* site-white: #F9FBFC */
+
+    --accent: 30 90% 65%; /* Vibrant Gold: #F4A259 */
+    --accent-foreground: 210 79% 16%; /* Deep Navy for text on gold */
+
+    --muted: 220 20% 90%; /* Site Gray: #E3E8F0 */
+    --muted-foreground: 215 20% 45%; /* Darker gray for text on muted */
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 220 25% 98.6%; /* site-white */
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 210 79% 16%; /* Deep Navy for rings/focus */
+
+    --radius: 0.5rem;
+
+    --font-inter: "Inter", sans-serif;
+    --font-merriweather: "Merriweather", serif;
+  }
+
+  .dark {
+    /* Dark theme overrides */
+    --background: 210 79% 10%; /* A slightly darker deep-navy for dark bg */
+    --foreground: 220 20% 90%; /* site-gray for dark mode text */
+
+    --card: 210 79% 12%; /* Darker card background */
+    --card-foreground: 220 20% 90%; /* site-gray for card text */
+
+    --popover: 210 79% 12%;
+    --popover-foreground: 220 20% 90%;
+
+    /* Primary, Secondary, Accent might need adjustments if their base colors don't contrast well on dark bg */
+    /* For now, keeping them as defined, assuming they are accent colors */
+    --primary: 193 100% 40%; /* Teal, possibly brightened for dark mode */
+    --primary-foreground: 210 79% 16%; /* Deep Navy */
+
+    --secondary: 30 90% 65%; /* Vibrant Gold, possibly as primary action color in dark */
+    --secondary-foreground: 210 79% 16%; /* Deep Navy */
+
+    --accent: 193 100% 31%; /* Teal as accent */
+    --accent-foreground: 220 25% 98.6%; /* site-white */
+
+    --muted: 210 79% 15%; /* Darker muted */
+    --muted-foreground: 220 20% 65%;
+
+    --destructive: 0 70% 50%;
+    --destructive-foreground: 220 25% 98.6%;
+
+    --border: 210 79% 20%;
+    --input: 210 79% 20%;
+    --ring: 193 100% 40%; /* Teal for rings/focus in dark mode */
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    /* This now correctly applies the theme variables. */
+    /* In light mode: bg-site-white, text-deep-navy */
+    /* In dark mode: variables change, so bg/text color flips. */
+    @apply bg-background text-foreground font-serif;
+    /* The problematic line with `light:` prefix is removed. */
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-sans font-semibold; /* Inter for headings */
+  }
+}
