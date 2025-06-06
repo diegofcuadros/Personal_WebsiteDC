@@ -67,7 +67,7 @@ export default function HomePage() {
         <div className="container relative z-10 px-4 md:px-6">
           <div className="grid md:grid-cols-2 gap-8 md:gap-16 items-center">
             <div className="order-2 md:order-1 animate-fade-in">
-              <h1 className="mb-6 gradient-text-primary dark:gradient-text-primary-dark">
+              <h1 className="mb-6 text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-slate-800 via-slate-700 to-slate-900 dark:from-slate-200 dark:via-slate-100 dark:to-slate-300 bg-clip-text text-transparent font-sans tracking-tight">
                 Dr. Diego F. Cuadros
               </h1>
               <h2 className="text-2xl md:text-3xl font-semibold text-teal-500 dark:text-vibrant-gold-400 mb-6 font-sans animate-slide-in-bottom [animation-delay:0.2s]">

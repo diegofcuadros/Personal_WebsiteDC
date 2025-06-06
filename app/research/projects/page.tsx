@@ -58,14 +58,14 @@ export default function ProjectsPage() {
   return (
     <>
       <div className="flex items-center mb-10">
-        <Lightbulb className="h-10 w-10 md:h-12 md:w-12 mr-4 text-teal dark:text-vibrant-gold flex-shrink-0" />
-        <h2 className="text-2xl md:text-3xl font-bold font-sans text-deep-navy dark:text-site-white">Projects</h2>
+        <Lightbulb className="h-10 w-10 md:h-12 md:w-12 mr-4 text-teal-600 dark:text-teal-400 flex-shrink-0" />
+        <h2 className="text-2xl md:text-3xl font-bold font-sans text-slate-900 dark:text-slate-100">Projects</h2>
       </div>
 
       <div className="mb-10">
         <div className="flex items-center mb-6">
-          <RefreshCw className="h-7 w-7 mr-3 text-teal dark:text-vibrant-gold" />
-          <h3 className="text-xl md:text-2xl font-semibold font-sans text-deep-navy dark:text-site-white">
+          <RefreshCw className="h-7 w-7 mr-3 text-teal-600 dark:text-teal-400" />
+          <h3 className="text-xl md:text-2xl font-semibold font-sans text-slate-900 dark:text-slate-100">
             Current Projects
           </h3>
         </div>
@@ -73,53 +73,53 @@ export default function ProjectsPage() {
           {currentProjectsData.map((project) => (
             <Card
               key={project.title}
-              className="bg-background/50 dark:bg-background/20 hover:shadow-lg transition-shadow"
+              className="bg-white dark:bg-slate-800 hover:shadow-lg transition-shadow border border-slate-200 dark:border-slate-700"
             >
               <CardHeader>
                 <div className="flex items-start space-x-3">
-                  <project.icon className="h-7 w-7 text-teal dark:text-vibrant-gold mt-1 flex-shrink-0" />
+                  <project.icon className="h-7 w-7 text-teal-600 dark:text-teal-400 mt-1 flex-shrink-0" />
                   <div>
-                    <CardTitle className="text-lg font-sans text-teal dark:text-vibrant-gold">
+                    <CardTitle className="text-lg font-sans text-slate-900 dark:text-slate-100">
                       {project.title}
                     </CardTitle>
                     {project.funding && (
-                      <CardDescription className="font-serif text-xs text-deep-navy/70 dark:text-site-gray/70 pt-0.5">
+                      <CardDescription className="font-serif text-xs text-slate-600 dark:text-slate-400 pt-0.5">
                         Funding: {project.funding}
                       </CardDescription>
                     )}
                   </div>
                 </div>
               </CardHeader>
-              <CardContent className="space-y-2 text-sm font-serif text-deep-navy/80 dark:text-site-gray/80">
+              <CardContent className="space-y-2 text-sm font-serif text-slate-700 dark:text-slate-300">
                 <p>
-                  <span className="font-sans font-semibold text-deep-navy/90 dark:text-site-gray/90">Goal:</span>{" "}
+                  <span className="font-sans font-semibold text-slate-900 dark:text-slate-100">Goal:</span>{" "}
                   {project.goal}
                 </p>
                 <p>
-                  <span className="font-sans font-semibold text-deep-navy/90 dark:text-site-gray/90">Methods:</span>{" "}
+                  <span className="font-sans font-semibold text-slate-900 dark:text-slate-100">Methods:</span>{" "}
                   {project.methods}
                 </p>
                 {project.partners && (
                   <p>
-                    <span className="font-sans font-semibold text-deep-navy/90 dark:text-site-gray/90">Partners:</span>{" "}
+                    <span className="font-sans font-semibold text-slate-900 dark:text-slate-100">Partners:</span>{" "}
                     {project.partners}
                   </p>
                 )}
                 {project.output && (
                   <p>
-                    <span className="font-sans font-semibold text-deep-navy/90 dark:text-site-gray/90">Output:</span>{" "}
+                    <span className="font-sans font-semibold text-slate-900 dark:text-slate-100">Output:</span>{" "}
                     {project.output}
                   </p>
                 )}
                 {project.impact && (
                   <p>
-                    <span className="font-sans font-semibold text-deep-navy/90 dark:text-site-gray/90">Impact:</span>{" "}
+                    <span className="font-sans font-semibold text-slate-900 dark:text-slate-100">Impact:</span>{" "}
                     {project.impact}
                   </p>
                 )}
                 {project.useCase && (
                   <p>
-                    <span className="font-sans font-semibold text-deep-navy/90 dark:text-site-gray/90">Use Case:</span>{" "}
+                    <span className="font-sans font-semibold text-slate-900 dark:text-slate-100">Use Case:</span>{" "}
                     {project.useCase}
                   </p>
                 )}
@@ -131,8 +131,8 @@ export default function ProjectsPage() {
 
       <div>
         <div className="flex items-center mb-6">
-          <CheckCircle className="h-7 w-7 mr-3 text-teal dark:text-vibrant-gold" />
-          <h3 className="text-xl md:text-2xl font-semibold font-sans text-deep-navy dark:text-site-white">
+          <CheckCircle className="h-7 w-7 mr-3 text-teal-600 dark:text-teal-400" />
+          <h3 className="text-xl md:text-2xl font-semibold font-sans text-slate-900 dark:text-slate-100">
             Past Projects (Selected)
           </h3>
         </div>
@@ -140,16 +140,16 @@ export default function ProjectsPage() {
           {pastProjectsData.map((project) => (
             <Card
               key={project.title}
-              className="bg-background/50 dark:bg-background/20 hover:shadow-lg transition-shadow"
+              className="bg-white dark:bg-slate-800 hover:shadow-lg transition-shadow border border-slate-200 dark:border-slate-700"
             >
               <CardHeader className="flex-row items-start space-x-3 pb-3">
-                <project.icon className="h-6 w-6 text-teal dark:text-vibrant-gold mt-0.5 flex-shrink-0" />
-                <CardTitle className="text-md font-sans text-teal dark:text-vibrant-gold leading-tight">
+                <project.icon className="h-6 w-6 text-teal-600 dark:text-teal-400 mt-0.5 flex-shrink-0" />
+                <CardTitle className="text-md font-sans text-slate-900 dark:text-slate-100 leading-tight">
                   {project.title}
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="font-serif text-sm text-deep-navy/80 dark:text-site-gray/80">{project.description}</p>
+                <p className="font-serif text-sm text-slate-700 dark:text-slate-300">{project.description}</p>
               </CardContent>
             </Card>
           ))}

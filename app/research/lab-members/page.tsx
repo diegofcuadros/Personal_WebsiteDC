@@ -34,7 +34,7 @@ const labData: Section[] = [
     id: "current-phd-advisees",
     title: "Current PhD Advisees",
     icon: GraduationCap,
-    color: "bg-gradient-to-r from-indigo-600 via-purple-600 to-blue-600",
+    color: "bg-gradient-to-r from-slate-700 via-slate-800 to-slate-900",
     description: "Doctoral students under direct supervision",
     students: [
       {
@@ -71,7 +71,7 @@ const labData: Section[] = [
     id: "current-committee",
     title: "Current PhD Committee Members",
     icon: Users,
-    color: "bg-gradient-to-r from-slate-700 via-slate-800 to-slate-900",
+    color: "bg-gradient-to-r from-stone-600 via-stone-700 to-stone-800",
     description: "Doctoral students on dissertation committees",
     students: [
       {
@@ -96,7 +96,7 @@ const labData: Section[] = [
     id: "former-phd-advisees",
     title: "Former PhD Advisees",
     icon: Award,
-    color: "bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-600",
+    color: "bg-gradient-to-r from-zinc-600 via-zinc-700 to-zinc-800",
     description: "Successfully graduated doctoral students",
     students: [
       {
@@ -126,7 +126,7 @@ const labData: Section[] = [
     id: "former-ma-advisees",
     title: "Former MA Advisees",
     icon: BookOpen,
-    color: "bg-gradient-to-r from-rose-600 via-pink-600 to-fuchsia-600",
+    color: "bg-gradient-to-r from-gray-600 via-gray-700 to-gray-800",
     description: "Successfully graduated master's students",
     students: [
       {
@@ -155,7 +155,7 @@ const labData: Section[] = [
     id: "former-phd-committee",
     title: "Former PhD Committee Members",
     icon: Users,
-    color: "bg-gradient-to-r from-amber-600 via-orange-600 to-red-600",
+    color: "bg-gradient-to-r from-neutral-600 via-neutral-700 to-neutral-800",
     description: "Previously served on dissertation committees",
     students: [
       {
@@ -191,7 +191,7 @@ const labData: Section[] = [
     id: "former-ma-committee",
     title: "Former MA Committee Members",
     icon: BookOpen,
-    color: "bg-gradient-to-r from-violet-600 via-purple-600 to-indigo-600",
+    color: "bg-gradient-to-r from-slate-600 via-slate-700 to-slate-800",
     description: "Previously served on master's thesis committees",
     students: [
       {

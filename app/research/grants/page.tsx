@@ -4,12 +4,12 @@ export default function GrantsPage() {
   return (
     <>
       <div className="flex items-center mb-10">
-        <FileText className="h-10 w-10 md:h-12 md:w-12 mr-4 text-teal dark:text-vibrant-gold flex-shrink-0" />
-        <h2 className="text-2xl md:text-3xl font-bold font-sans text-deep-navy dark:text-site-white">
+        <FileText className="h-10 w-10 md:h-12 md:w-12 mr-4 text-teal-600 dark:text-teal-400 flex-shrink-0" />
+        <h2 className="text-2xl md:text-3xl font-bold font-sans text-slate-900 dark:text-slate-100">
           Grants & Funding
         </h2>
       </div>
-      <div className="max-w-3xl mx-auto space-y-6 font-serif text-lg leading-relaxed text-deep-navy/80 dark:text-site-gray/80">
+      <div className="max-w-3xl mx-auto space-y-6 font-serif text-lg leading-relaxed text-slate-700 dark:text-slate-300">
         <p>
           This section will detail significant grants that support our research, including Grant Name, Funding Agency,
           Role (e.g., PI, Co-PI), Amount, and Period.

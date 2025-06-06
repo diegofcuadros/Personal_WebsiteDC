@@ -1,155 +1,336 @@
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
-import { BarChart3, MapIcon, LineChart, Users } from "lucide-react"
+"use client"
 
-const services = [
+import { Lightbulb, Users, MapPin, Microscope, Book, Globe, ChevronRight, Target, Award, Building, GraduationCap, Briefcase } from "lucide-react"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
+import { motion } from "framer-motion"
+import { useScrollAnimation } from "@/hooks/use-scroll-animation"
+
+interface ExpertiseArea {
+  id: string
+  title: string
+  category: string
+  description: string
+  keyServices: string[]
+  applications: string[]
+  industries?: string[]
+  highlight?: string
+}
+
+const expertiseAreas: ExpertiseArea[] = [
   {
-    title: "Advanced Epidemiological Modeling",
-    icon: LineChart,
-    description:
-      "Developing and applying sophisticated models to predict disease spread, assess intervention impacts, and understand transmission dynamics.",
-    details: ["Agent-based modeling", "Compartmental models (SIR, SEIR)", "Network analysis"],
+    id: "spatial-epidemiology",
+    title: "Disease Mapping & Spatial Epidemiology",
+    category: "Public Health Analytics",
+    description: "Advanced spatial analysis of disease patterns, outbreak investigation, and epidemiological modeling using cutting-edge GIS technologies and statistical methods.",
+    keyServices: [
+      "Disease clustering and hotspot analysis",
+      "Risk factor mapping and environmental correlation",
+      "Temporal-spatial modeling of disease transmission",
+      "Public health surveillance system design"
+    ],
+    applications: [
+      "COVID-19 transmission modeling",
+      "Vector-borne disease prediction",
+      "Healthcare accessibility analysis"
+    ],
+    industries: ["Health Departments", "WHO/PAHO", "Research Institutions"],
+    highlight: "Expertise in modeling complex disease dynamics across multiple scales"
   },
   {
-    title: "Geospatial Health Disparities Analysis",
-    icon: MapIcon,
-    description:
-      "Utilizing GIS and spatial statistics to identify health disparities, map disease hotspots, and analyze environmental/social determinants of health.",
-    details: ["Cluster analysis", "Geographically weighted regression", "Accessibility modeling"],
+    id: "landscape-ecology",
+    title: "Landscape Ecology & Conservation Planning",
+    category: "Environmental Science",
+    description: "Comprehensive landscape analysis combining ecological principles with spatial technologies to support biodiversity conservation and sustainable land management decisions.",
+    keyServices: [
+      "Habitat connectivity and fragmentation analysis",
+      "Species distribution modeling",
+      "Land use change impact assessment",
+      "Conservation prioritization and corridor design"
+    ],
+    applications: [
+      "Protected area network optimization",
+      "Climate change adaptation planning",
+      "Ecosystem service valuation"
+    ],
+    industries: ["Conservation NGOs", "Government Agencies", "Environmental Consulting"],
+    highlight: "Bridging ecological theory with practical conservation outcomes"
   },
   {
-    title: "Data Science & Visualization for Public Health",
-    icon: BarChart3,
-    description:
-      "Leveraging large datasets, machine learning, and interactive visualizations to extract insights and communicate complex health information effectively.",
-    details: ["Big data analytics (R, Python)", "Predictive analytics", "Interactive dashboards (Tableau, R Shiny)"],
-  },
-  {
-    title: "Research Collaboration & Grant Partnership",
-    icon: Users,
-    description:
-      "Partnering on research projects, grant proposals, and academic initiatives to advance public health knowledge and solutions.",
-    details: ["NIH grant expertise", "Interdisciplinary team leadership", "Study design consultation"],
-  },
+    id: "gis-modeling",
+    title: "Advanced GIS Modeling & Spatial Analytics",
+    category: "Geospatial Technology",
+    description: "Sophisticated spatial modeling and analysis services leveraging state-of-the-art GIS technologies, remote sensing, and statistical approaches for complex problem-solving.",
+    keyServices: [
+      "Custom spatial model development",
+      "Multi-criteria decision analysis",
+      "Spatial optimization and scenario planning",
+      "Remote sensing and image analysis"
+    ],
+    applications: [
+      "Urban planning and smart city initiatives",
+      "Natural resource management",
+      "Climate impact modeling"
+    ],
+    industries: ["Urban Planning", "Natural Resources", "Technology Sector"],
+    highlight: "Transforming complex spatial problems into actionable insights"
+  }
 ]
 
-const caseStudies = [
+const consultingAreas = [
   {
-    title: "Case Study: Mapping HIV Hotspots in Rural Kenya",
-    problem: "Limited understanding of precise HIV distribution hindering targeted prevention efforts.",
-    solution: "Applied geospatial analysis to identify micro-hotspots of HIV transmission.",
-    outcome: "Informed resource allocation for localized testing and prevention campaigns, improving efficiency.",
-    tags: ["HIV", "Geospatial Analysis", "Africa"],
+    icon: Microscope,
+    title: "Research Design",
+    description: "Study design and methodology for spatial health and ecological research"
   },
   {
-    title: "Case Study: COVID-19 Spread Modeling in Urban Ohio",
-    problem: "Need for accurate local projections to guide public health responses during the pandemic.",
-    solution: "Developed SEIR models incorporating mobility data and local demographics.",
-    outcome: "Provided actionable insights to local health departments for intervention planning.",
-    tags: ["COVID-19", "Disease Modeling", "USA"],
+    icon: Globe,
+    title: "International Projects",
+    description: "Cross-border collaboration and global health initiatives"
   },
+  {
+    icon: GraduationCap,
+    title: "Capacity Building",
+    description: "Training programs and institutional development"
+  },
+  {
+    icon: Building,
+    title: "Policy Analysis",
+    description: "Evidence-based policy recommendations and impact assessment"
+  }
 ]
+
+function ExpertiseOverview() {
+  const { ref, isVisible } = useScrollAnimation<HTMLDivElement>({ triggerOnce: true, threshold: 0.2 })
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 20 }}
+      animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+      transition={{ duration: 0.6 }}
+      className="mb-16"
+    >
+      <Card className="bg-gradient-to-br from-blue-50 via-white to-indigo-50 dark:from-blue-950/20 dark:via-slate-900 dark:to-indigo-950/20 border-0 shadow-xl">
+        <CardHeader className="text-center pb-6">
+          <div className="flex justify-center mb-4">
+            <div className="p-4 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white">
+              <Lightbulb className="h-8 w-8" />
+            </div>
+          </div>
+          <CardTitle className="text-2xl md:text-3xl font-bold font-sans text-slate-900 dark:text-slate-100">
+            Professional Expertise
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="px-8 pb-8">
+          <div className="max-w-4xl mx-auto">
+            <p className="text-lg font-serif leading-relaxed text-slate-700 dark:text-slate-300 mb-8 text-center">
+              Combining deep expertise in spatial epidemiology, landscape ecology, and GIS technologies to deliver 
+              innovative solutions for complex health and environmental challenges worldwide.
+            </p>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+              {consultingAreas.map((area, index) => (
+                <motion.div
+                  key={area.title}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                  transition={{ delay: index * 0.1, duration: 0.5 }}
+                  className="text-center"
+                >
+                  <div className="p-3 rounded-full bg-gradient-to-r from-teal-500 to-cyan-500 text-white w-fit mx-auto mb-3">
+                    <area.icon className="h-6 w-6" />
+                  </div>
+                  <h4 className="font-sans font-semibold text-slate-900 dark:text-slate-100 mb-2">
+                    {area.title}
+                  </h4>
+                  <p className="text-sm font-serif text-slate-700 dark:text-slate-300">
+                    {area.description}
+                  </p>
+                </motion.div>
+              ))}
+            </div>
+            
+            <div className="bg-white/50 dark:bg-slate-800/50 rounded-lg p-6 border border-blue-200 dark:border-blue-800">
+              <p className="font-serif text-slate-700 dark:text-slate-300 leading-relaxed">
+                With over a decade of experience in academic research and consulting, I provide evidence-based solutions 
+                that bridge the gap between cutting-edge science and practical implementation.
+              </p>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+    </motion.div>
+  )
+}
+
+function ExpertiseCard({ expertise, index }: { expertise: ExpertiseArea; index: number }) {
+  const { ref, isVisible } = useScrollAnimation<HTMLDivElement>({ triggerOnce: true, threshold: 0.2 })
+
+  const gradients = [
+    "bg-gradient-to-br from-emerald-600 via-teal-600 to-cyan-600",
+    "bg-gradient-to-br from-rose-600 via-pink-600 to-fuchsia-600",
+    "bg-gradient-to-br from-amber-600 via-orange-600 to-red-600"
+  ]
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
+      animate={isVisible ? { opacity: 1, x: 0 } : { opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
+      transition={{ duration: 0.6, delay: index * 0.2 }}
+    >
+      <Card className="h-full hover:shadow-2xl transition-all duration-300 border-0 overflow-hidden">
+        <CardHeader className={`${gradients[index % gradients.length]} text-white relative`}>
+          <div className="absolute inset-0 bg-black/10"></div>
+          <div className="relative">
+            <div className="mb-4">
+              <Badge variant="secondary" className="bg-white/20 text-white hover:bg-white/30 mb-2">
+                {expertise.category}
+              </Badge>
+              <CardTitle className="text-xl md:text-2xl font-bold font-sans mb-2">
+                {expertise.title}
+              </CardTitle>
+            </div>
+          </div>
+        </CardHeader>
+        
+        <CardContent className="p-6 space-y-6">
+          <p className="font-serif text-slate-700 dark:text-slate-300 leading-relaxed">
+            {expertise.description}
+          </p>
+          
+          <div>
+            <h4 className="font-sans font-semibold text-slate-900 dark:text-slate-100 mb-3 flex items-center">
+              <Target className="h-5 w-5 mr-2 text-teal-500" />
+              Key Services
+            </h4>
+            <div className="grid grid-cols-1 gap-2">
+              {expertise.keyServices.map((service, idx) => (
+                <div key={idx} className="flex items-start">
+                  <ChevronRight className="h-4 w-4 text-teal-500 mt-1 mr-2 flex-shrink-0" />
+                  <span className="text-sm font-serif text-slate-700 dark:text-slate-300">
+                    {service}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+          
+          <div>
+            <h4 className="font-sans font-semibold text-slate-900 dark:text-slate-100 mb-3 flex items-center">
+              <Award className="h-5 w-5 mr-2 text-purple-500" />
+              Applications
+            </h4>
+            <div className="space-y-2">
+              {expertise.applications.map((application, idx) => (
+                <div key={idx} className="flex items-start">
+                  <ChevronRight className="h-4 w-4 text-purple-500 mt-1 mr-2 flex-shrink-0" />
+                  <span className="text-sm font-serif text-slate-700 dark:text-slate-300">
+                    {application}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+          
+          {expertise.industries && (
+            <div>
+              <h4 className="font-sans font-semibold text-slate-900 dark:text-slate-100 mb-3">
+                Target Industries
+              </h4>
+              <div className="flex flex-wrap gap-2">
+                {expertise.industries.map((industry) => (
+                  <Badge key={industry} variant="outline" className="text-xs">
+                    {industry}
+                  </Badge>
+                ))}
+              </div>
+            </div>
+          )}
+          
+          {expertise.highlight && (
+            <div className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-950/20 dark:to-indigo-950/20 rounded-lg p-4 border-l-4 border-blue-500">
+              <h4 className="font-sans font-semibold text-blue-700 dark:text-blue-300 mb-2 flex items-center">
+                <Briefcase className="h-5 w-5 mr-2" />
+                Specialized Focus
+              </h4>
+              <p className="text-sm font-serif text-blue-700 dark:text-blue-300">
+                {expertise.highlight}
+              </p>
+            </div>
+          )}
+        </CardContent>
+      </Card>
+    </motion.div>
+  )
+}
 
 export default function ExpertiseServicesPage() {
   return (
-    <div className="bg-site-white dark:bg-slate-900">
-      <div className="container py-12 md:py-16 px-4 md:px-6">
-        <header className="text-center mb-12 md:mb-16">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 font-sans bg-clip-text text-transparent bg-gradient-to-r from-deep-navy via-teal to-vibrant-gold dark:from-slate-100 dark:via-teal-400 dark:to-yellow-400">
+    <>
+      <div className="flex items-center mb-12">
+        <GraduationCap className="h-10 w-10 md:h-12 md:w-12 mr-4 text-blue-600 dark:text-blue-400 flex-shrink-0" />
+        <div>
+          <h2 className="text-2xl md:text-3xl font-bold font-sans text-slate-900 dark:text-slate-100">
             Expertise & Services
-          </h1>
-          <p className="text-xl md:text-2xl text-teal-600 dark:text-teal-400 font-semibold font-sans max-w-3xl mx-auto">
-            Leveraging data science and epidemiological methods to drive public health innovation and impact.
-          </p>
-        </header>
-
-        <section id="service-offerings" className="mb-12 md:mb-16">
-          <h2 className="text-3xl font-bold font-sans text-slate-900 dark:text-slate-100 mb-8 text-center">
-            Service Offerings
           </h2>
-          <div className="grid md:grid-cols-2 gap-8">
-            {services.map((service) => (
-              <Card
-                key={service.title}
-                className="flex flex-col bg-white dark:bg-slate-800 hover:shadow-xl transition-shadow duration-300 border-l-4 border-teal-500 dark:border-teal-400 border-slate-200 dark:border-slate-700"
-              >
-                <CardHeader className="flex-row items-start space-x-4 pb-4">
-                  <service.icon className="h-10 w-10 text-teal-600 dark:text-teal-400 mt-1" />
-                  <div>
-                    <CardTitle className="text-2xl font-semibold font-sans text-slate-900 dark:text-slate-100">
-                      {service.title}
-                    </CardTitle>
-                    <CardDescription className="font-serif text-slate-700 dark:text-slate-300 pt-1">
-                      {service.description}
-                    </CardDescription>
-                  </div>
-                </CardHeader>
-                <CardContent className="flex-grow">
-                  {service.details && service.details.length > 0 && (
-                    <>
-                      <h4 className="font-sans font-semibold text-sm text-slate-900 dark:text-slate-100 mb-1">
-                        Key areas include:
-                      </h4>
-                      <ul className="list-disc list-inside space-y-1 font-serif text-sm text-slate-600 dark:text-slate-400">
-                        {service.details.map((detail) => (
-                          <li key={detail}>{detail}</li>
-                        ))}
-                      </ul>
-                    </>
-                  )}
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </section>
-
-        <section id="case-studies">
-          <h2 className="text-3xl font-bold font-sans text-slate-900 dark:text-slate-100 mb-8 text-center">
-            Impactful Case Studies
-          </h2>
-          <div className="grid md:grid-cols-2 gap-6">
-            {caseStudies.map((study) => (
-              <Card key={study.title} className="bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700">
-                <CardHeader>
-                  <CardTitle className="text-xl font-sans text-teal-600 dark:text-teal-400">{study.title}</CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-3">
-                  <div>
-                    <h4 className="font-sans text-sm font-semibold text-slate-900 dark:text-slate-100">
-                      The Challenge:
-                    </h4>
-                    <p className="font-serif text-sm text-slate-700 dark:text-slate-300">{study.problem}</p>
-                  </div>
-                  <div>
-                    <h4 className="font-sans text-sm font-semibold text-slate-900 dark:text-slate-100">
-                      Our Approach:
-                    </h4>
-                    <p className="font-serif text-sm text-slate-700 dark:text-slate-300">{study.solution}</p>
-                  </div>
-                  <div>
-                    <h4 className="font-sans text-sm font-semibold text-slate-900 dark:text-slate-100">
-                      The Outcome:
-                    </h4>
-                    <p className="font-serif text-sm text-slate-700 dark:text-slate-300">{study.outcome}</p>
-                  </div>
-                  <div className="pt-2">
-                    {study.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="inline-block bg-teal-100 dark:bg-teal-900/50 text-teal-800 dark:text-teal-300 text-xs font-sans px-2 py-1 rounded-full mr-2 mb-2"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-          <p className="font-serif text-center mt-8 text-slate-600 dark:text-slate-400">
-            More detailed case studies and client testimonials can be provided upon request.
+          <p className="text-sm text-muted-foreground mt-1 font-serif">
+            Professional consulting and research services in spatial epidemiology and landscape ecology
           </p>
-        </section>
+        </div>
       </div>
-    </div>
+      
+      {/* Expertise Overview Section */}
+      <ExpertiseOverview />
+      
+      {/* Expertise Areas Section */}
+      <div className="mb-16">
+        <div className="text-center mb-12">
+          <div className="flex justify-center mb-4">
+            <div className="p-3 rounded-full bg-gradient-to-r from-emerald-600 to-teal-600 text-white">
+              <Microscope className="h-6 w-6" />
+            </div>
+          </div>
+          <h3 className="text-2xl md:text-3xl font-bold font-sans text-slate-900 dark:text-slate-100 mb-4">
+            Core Expertise Areas
+          </h3>
+          <p className="text-lg font-serif text-slate-700 dark:text-slate-300 max-w-2xl mx-auto">
+            Specialized knowledge and practical experience across multiple domains of spatial science and public health
+          </p>
+        </div>
+        
+        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
+          {expertiseAreas.map((expertise, index) => (
+            <ExpertiseCard key={expertise.id} expertise={expertise} index={index} />
+          ))}
+        </div>
+      </div>
+      
+      {/* Collaboration Statement */}
+      <Card className="bg-gradient-to-r from-slate-50 to-stone-50 dark:from-slate-900 dark:to-stone-900 border-0 shadow-lg">
+        <CardContent className="p-8 text-center">
+          <div className="flex justify-center mb-6">
+            <div className="p-4 rounded-full bg-gradient-to-r from-amber-600 to-orange-600 text-white">
+              <Users className="h-8 w-8" />
+            </div>
+          </div>
+          <h3 className="text-xl md:text-2xl font-bold font-sans text-slate-900 dark:text-slate-100 mb-4">
+            Collaborative Approach
+          </h3>
+          <p className="font-serif text-slate-700 dark:text-slate-300 leading-relaxed max-w-3xl mx-auto mb-6">
+            Every project begins with understanding your unique challenges and objectives. I work closely with clients 
+            to develop tailored solutions that leverage cutting-edge spatial technologies while remaining practical 
+            and actionable.
+          </p>
+          <div className="flex flex-wrap justify-center gap-3">
+            <Badge variant="outline" className="text-sm px-4 py-2">Research Institutions</Badge>
+            <Badge variant="outline" className="text-sm px-4 py-2">Government Agencies</Badge>
+            <Badge variant="outline" className="text-sm px-4 py-2">International Organizations</Badge>
+            <Badge variant="outline" className="text-sm px-4 py-2">Private Sector</Badge>
+          </div>
+        </CardContent>
+      </Card>
+    </>
   )
 }
