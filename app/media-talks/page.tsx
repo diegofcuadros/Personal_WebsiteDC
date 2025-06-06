@@ -1,6 +1,7 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Mic, Tv, Newspaper } from "lucide-react"
-import Link from "next/link"
+import Link from "next/link";
+import YouTubeEmbed from "@/components/youtube-embed";
 
 const mediaHighlights = [
   {
@@ -44,6 +45,24 @@ const mediaHighlights = [
     link: "https://www.uc.edu/news/articles/2025/04/epicenter-of-opioid-epidemic-shifts-with-drug-preferences.html",
   },
 ]
+
+const featuredTalksVideos = [
+  {
+    videoId: "PMbXTsILMFg",
+    title: "Insights into Digital Epidemiology", 
+    description: "A discussion on the evolving field of digital epidemiology."
+  },
+  {
+    videoId: "qBsfVJ8qYU4",
+    title: "The Role of Data in Public Health",
+    description: "Exploring how data analytics shapes public health strategies."
+  },
+  {
+    videoId: "Wk9SSwgkuDY",
+    title: "Modeling Infectious Diseases",
+    description: "An overview of techniques used in modeling disease spread."
+  }
+];
 
 const talkTypes = [
   { name: "American Association of Geographers (AAG) Annual Meeting", icon: Tv },
@@ -124,8 +143,21 @@ export default function MediaTalksPage() {
             ))}
           </div>
           <p className="font-serif text-lg text-center text-deep-navy/80 dark:text-site-gray/80">
-            (A detailed talks timeline and embedded YouTube videos for keynotes will be added here.)
+            (A detailed talks timeline will be added here.)
           </p>
+
+          <h3 className="text-2xl font-bold font-sans text-deep-navy dark:text-site-white mt-12 mb-6 text-center">
+            Featured Talks (Videos)
+          </h3>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {featuredTalksVideos.map((item) => (
+              <div key={item.videoId} className="bg-site-gray-50 dark:bg-deep-navy-800 p-6 rounded-lg shadow-lg">
+                <YouTubeEmbed videoId={item.videoId} className="rounded-md overflow-hidden mb-4" />
+                <h4 className="text-lg font-semibold font-sans text-deep-navy dark:text-site-white mb-1">{item.title}</h4>
+                <p className="text-xs font-serif text-deep-navy/80 dark:text-site-gray/80">{item.description}</p>
+              </div>
+            ))}
+          </div>
         </section>
       </div>
     </div>
