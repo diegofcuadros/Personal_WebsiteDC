@@ -1,11 +1,13 @@
 "use client"
 
-import { Mic, Video, Presentation, Globe, Calendar, ExternalLink, ChevronRight, Target, Award, Quote, Users, BookOpen } from "lucide-react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Mic, Video, Presentation, Globe, Calendar, ExternalLink, ChevronRight, Target, Award, Quote, Users, BookOpen, Tv, Newspaper } from "lucide-react"
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { motion } from "framer-motion"
 import { useScrollAnimation } from "@/hooks/use-scroll-animation"
+import Link from "next/link"
+import YouTubeEmbed from "@/components/youtube-embed"
 
 interface MediaItem {
   id: string
@@ -30,6 +32,22 @@ interface TalkItem {
   audience: string
   keyPoints: string[]
   impact?: string
+}
+
+interface MediaHighlight {
+  type: string
+  outlet: string
+  title: string
+  date: string
+  description: string
+  icon: React.ElementType
+  link?: string
+}
+
+interface FeaturedVideo {
+  videoId: string
+  title: string
+  description: string
 }
 
 const mediaAppearances: MediaItem[] = [
@@ -116,6 +134,70 @@ const presentations: TalkItem[] = [
   }
 ]
 
+const mediaHighlights: MediaHighlight[] = [
+  {
+    type: "Interview",
+    outlet: "WVXU (Cincinnati NPR)",
+    title: "Coronavirus hitting rural communities hard",
+    date: "November 2020",
+    description: "Discussed findings on the COVID-19 surge in rural areas and the need for attention to rural healthcare.",
+    icon: Mic,
+    link: "https://www.uc.edu/news/articles/2020/11/wvxu-coronavirus-hitting-rural-communities-hard.html"
+  },
+  {
+    type: "Magazine Feature",
+    outlet: "UC Magazine",
+    title: "Championing science amid adversity",
+    date: "2020",
+    description: "Profile on Dr. Cuadros's approach to communicating data and research on HIV & COVID-19, even when politically sensitive.",
+    icon: Newspaper,
+    link: "https://www.uc.edu/news/1020/championing-science.html"
+  },
+  {
+    type: "Thought Leader Interview",
+    outlet: "News-Medical.net",
+    title: "Mapping access to HIV care",
+    date: "December 2021",
+    description: "Explained research on geolocating populations with HIV and measuring travel times to health facilities in Africa to identify underserved areas.",
+    icon: Mic,
+    link: "https://www.news-medical.net/news/20211223/Mapping-access-to-HIV-care.aspx"
+  },
+  {
+    type: "UC News Feature",
+    outlet: "UC News",
+    title: "Epicenter of opioid epidemic shifts with drug preferences",
+    date: "April 2025",
+    description: "Covered the Lancet Regional Health study on the evolving U.S. opioid epidemic, co-authored by Dr. Cuadros.",
+    icon: Newspaper,
+    link: "https://www.uc.edu/news/articles/2025/04/epicenter-of-opioid-epidemic-shifts-with-drug-preferences.html"
+  }
+]
+
+const featuredTalksVideos: FeaturedVideo[] = [
+  {
+    videoId: "PMbXTsILMFg",
+    title: "Insights into Digital Epidemiology", 
+    description: "A discussion on the evolving field of digital epidemiology."
+  },
+  {
+    videoId: "qBsfVJ8qYU4",
+    title: "The Role of Data in Public Health",
+    description: "Exploring how data analytics shapes public health strategies."
+  },
+  {
+    videoId: "Wk9SSwgkuDY",
+    title: "Modeling Infectious Diseases",
+    description: "An overview of techniques used in modeling disease spread."
+  }
+]
+
+const talkTypes = [
+  { name: "American Association of Geographers (AAG) Annual Meeting", icon: Tv },
+  { name: "International AIDS Conferences", icon: Tv },
+  { name: "Epidemiology Congresses", icon: Tv },
+  { name: "Digital Futures Flashpoint Series (UC)", icon: Tv }
+]
+
 const expertiseAreas = [
   {
     icon: Mic,
@@ -164,7 +246,7 @@ function MediaOverview() {
         <CardContent className="px-8 pb-8">
           <div className="max-w-4xl mx-auto">
             <p className="text-lg font-serif leading-relaxed text-slate-700 dark:text-slate-300 mb-8 text-center">
-              Translating complex spatial science research into accessible insights for diverse audiences through 
+              Sharing insights and engaging with the public, policymakers, and the scientific community through 
               media appearances, conference presentations, and educational outreach initiatives.
             </p>
             
@@ -192,8 +274,8 @@ function MediaOverview() {
             
             <div className="bg-white/50 dark:bg-slate-800/50 rounded-lg p-6 border border-purple-200 dark:border-purple-800">
               <p className="font-serif text-slate-700 dark:text-slate-300 leading-relaxed">
-                Committed to making spatial science accessible and actionable, bridging the gap between 
-                academic research and real-world applications through clear, engaging communication.
+                Leveraging data science and epidemiological methods to drive public health innovation and impact 
+                through clear, engaging communication across multiple platforms and audiences.
               </p>
             </div>
           </div>
@@ -395,6 +477,66 @@ function TalkCard({ talk, index }: { talk: TalkItem; index: number }) {
   )
 }
 
+function MediaHighlightCard({ media, index }: { media: MediaHighlight; index: number }) {
+  const { ref, isVisible } = useScrollAnimation<HTMLDivElement>({ triggerOnce: true, threshold: 0.2 })
+
+  const gradients = [
+    "bg-gradient-to-br from-emerald-600 via-teal-600 to-cyan-600",
+    "bg-gradient-to-br from-rose-600 via-pink-600 to-fuchsia-600",
+    "bg-gradient-to-br from-amber-600 via-orange-600 to-red-600",
+    "bg-gradient-to-br from-indigo-600 via-blue-600 to-cyan-600"
+  ]
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
+      animate={isVisible ? { opacity: 1, x: 0 } : { opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
+      transition={{ duration: 0.6, delay: index * 0.2 }}
+    >
+      <Card className="h-full hover:shadow-2xl transition-all duration-300 border-0 overflow-hidden">
+        <CardHeader className={`${gradients[index % gradients.length]} text-white relative`}>
+          <div className="absolute inset-0 bg-black/10"></div>
+          <div className="relative">
+            <div className="flex items-start justify-between mb-4">
+              <div className="flex-1">
+                <div className="flex items-center mb-2">
+                  <media.icon className="h-5 w-5 mr-2" />
+                  <Badge variant="secondary" className="bg-white/20 text-white hover:bg-white/30">
+                    {media.type}
+                  </Badge>
+                </div>
+                <CardTitle className="text-xl md:text-2xl font-bold font-sans mb-2">
+                  {media.title}
+                </CardTitle>
+              </div>
+              <div className="text-right ml-4">
+                <p className="text-sm opacity-90 font-medium">{media.outlet}</p>
+                <p className="text-xs opacity-80">{media.date}</p>
+              </div>
+            </div>
+          </div>
+        </CardHeader>
+        
+        <CardContent className="p-6 space-y-6">
+          <p className="font-serif text-slate-700 dark:text-slate-300 leading-relaxed">
+            {media.description}
+          </p>
+          
+          {media.link && (
+            <Button asChild variant="outline" className="w-full">
+              <Link href={media.link} target="_blank">
+                <ExternalLink className="h-4 w-4 mr-2" />
+                Read More
+              </Link>
+            </Button>
+          )}
+        </CardContent>
+      </Card>
+    </motion.div>
+  )
+}
+
 export default function MediaTalksPage() {
   return (
     <>
@@ -405,7 +547,7 @@ export default function MediaTalksPage() {
             Media & Talks
           </h2>
           <p className="text-sm text-muted-foreground mt-1 font-serif">
-            Sharing spatial science insights through media appearances and professional presentations
+            Sharing insights and engaging with the public, policymakers, and the scientific community
           </p>
         </div>
       </div>
@@ -413,7 +555,7 @@ export default function MediaTalksPage() {
       {/* Media Overview Section */}
       <MediaOverview />
       
-      {/* Media Appearances Section */}
+      {/* Media Highlights Section */}
       <div className="mb-16">
         <div className="text-center mb-12">
           <div className="flex justify-center mb-4">
@@ -422,16 +564,16 @@ export default function MediaTalksPage() {
             </div>
           </div>
           <h3 className="text-2xl md:text-3xl font-bold font-sans text-slate-900 dark:text-slate-100 mb-4">
-            Media Appearances
+            Media Highlights
           </h3>
           <p className="text-lg font-serif text-slate-700 dark:text-slate-300 max-w-2xl mx-auto">
-            Television interviews, podcast appearances, and educational webinars bringing spatial science to broader audiences
+            Recent media appearances and features showcasing research insights and public health expertise
           </p>
         </div>
         
-        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
-          {mediaAppearances.map((media, index) => (
-            <MediaCard key={media.id} media={media} index={index} />
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {mediaHighlights.map((media, index) => (
+            <MediaHighlightCard key={media.title} media={media} index={index} />
           ))}
         </div>
       </div>
@@ -445,16 +587,40 @@ export default function MediaTalksPage() {
             </div>
           </div>
           <h3 className="text-2xl md:text-3xl font-bold font-sans text-slate-900 dark:text-slate-100 mb-4">
-            Conference Presentations
+            Talks & Presentations
           </h3>
-          <p className="text-lg font-serif text-slate-700 dark:text-slate-300 max-w-2xl mx-auto">
-            Keynote addresses and invited presentations at leading international conferences and professional gatherings
+          <p className="text-lg font-serif text-slate-700 dark:text-slate-300 max-w-2xl mx-auto mb-6">
+            Dr. Cuadros frequently presents his research at national and international conferences, workshops, and
+            public forums. Key venues include:
           </p>
         </div>
         
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {presentations.map((talk, index) => (
-            <TalkCard key={talk.id} talk={talk} index={index} />
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
+          {talkTypes.map((type) => (
+            <div key={type.name} className="flex items-center p-3 bg-slate-100 dark:bg-slate-800 rounded-md border border-slate-200 dark:border-slate-700">
+              <type.icon className="h-5 w-5 mr-2 text-teal-600 dark:text-teal-400" />
+              <span className="font-sans text-sm text-slate-800 dark:text-slate-200">{type.name}</span>
+            </div>
+          ))}
+        </div>
+        
+        <p className="font-serif text-lg text-center text-slate-700 dark:text-slate-300 mb-12">
+          (A detailed talks timeline will be added here.)
+        </p>
+
+        <div className="text-center mb-12">
+          <h4 className="text-2xl font-bold font-sans text-slate-900 dark:text-slate-100 mb-6">
+            Featured Talks (Videos)
+          </h4>
+        </div>
+        
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {featuredTalksVideos.map((item) => (
+            <div key={item.videoId} className="bg-slate-50 dark:bg-slate-800 p-6 rounded-lg shadow-lg border border-slate-200 dark:border-slate-700">
+              <YouTubeEmbed videoId={item.videoId} className="rounded-md overflow-hidden mb-4" />
+              <h4 className="text-lg font-semibold font-sans text-slate-900 dark:text-slate-100 mb-1">{item.title}</h4>
+              <p className="text-xs font-serif text-slate-700 dark:text-slate-300">{item.description}</p>
+            </div>
           ))}
         </div>
       </div>
@@ -468,12 +634,10 @@ export default function MediaTalksPage() {
             </div>
           </div>
           <h3 className="text-xl md:text-2xl font-bold font-sans text-slate-900 dark:text-slate-100 mb-4">
-            Available for Speaking Engagements
+            Interested in collaboration or consulting?
           </h3>
           <p className="font-serif text-slate-700 dark:text-slate-300 leading-relaxed max-w-3xl mx-auto mb-6">
-            I welcome opportunities to share insights on spatial epidemiology, landscape ecology, and GIS applications 
-            with diverse audiences. From academic conferences to industry workshops, I tailor presentations to meet 
-            your specific needs and objectives.
+            Let's talk about how we can leverage data to solve complex health challenges together.
           </p>
           <div className="flex flex-wrap justify-center gap-3">
             <Badge variant="outline" className="text-sm px-4 py-2">Academic Conferences</Badge>

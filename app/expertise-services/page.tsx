@@ -1,6 +1,6 @@
 "use client"
 
-import { Lightbulb, Users, MapPin, Microscope, Book, Globe, ChevronRight, Target, Award, Building, GraduationCap, Briefcase } from "lucide-react"
+import { Lightbulb, Users, MapPin, Microscope, Book, Globe, ChevronRight, Target, Award, Building, GraduationCap, Briefcase, BarChart3, TrendingUp, Database } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { motion } from "framer-motion"
@@ -38,23 +38,23 @@ const expertiseAreas: ExpertiseArea[] = [
     highlight: "Expertise in modeling complex disease dynamics across multiple scales"
   },
   {
-    id: "landscape-ecology",
-    title: "Landscape Ecology & Conservation Planning",
-    category: "Environmental Science",
-    description: "Comprehensive landscape analysis combining ecological principles with spatial technologies to support biodiversity conservation and sustainable land management decisions.",
+    id: "data-analytics-visualization",
+    title: "Data Analytics & Visualization",
+    category: "Data Science",
+    description: "Advanced data analytics and visualization services that transform complex datasets into actionable insights through statistical analysis, machine learning, and interactive visualization techniques.",
     keyServices: [
-      "Habitat connectivity and fragmentation analysis",
-      "Species distribution modeling",
-      "Land use change impact assessment",
-      "Conservation prioritization and corridor design"
+      "Statistical modeling and predictive analytics",
+      "Interactive dashboard development",
+      "Data mining and pattern recognition",
+      "Custom visualization design and implementation"
     ],
     applications: [
-      "Protected area network optimization",
-      "Climate change adaptation planning",
-      "Ecosystem service valuation"
+      "Public health surveillance dashboards",
+      "Real-time epidemiological monitoring",
+      "Spatial data storytelling and communication"
     ],
-    industries: ["Conservation NGOs", "Government Agencies", "Environmental Consulting"],
-    highlight: "Bridging ecological theory with practical conservation outcomes"
+    industries: ["Healthcare Organizations", "Research Institutions", "Government Agencies"],
+    highlight: "Transforming complex data into compelling visual narratives"
   },
   {
     id: "gis-modeling",
@@ -125,7 +125,7 @@ function ExpertiseOverview() {
         <CardContent className="px-8 pb-8">
           <div className="max-w-4xl mx-auto">
             <p className="text-lg font-serif leading-relaxed text-slate-700 dark:text-slate-300 mb-8 text-center">
-              Combining deep expertise in spatial epidemiology, landscape ecology, and GIS technologies to deliver 
+              Combining deep expertise in spatial epidemiology, data analytics & visualization, and GIS technologies to deliver 
               innovative solutions for complex health and environmental challenges worldwide.
             </p>
             
