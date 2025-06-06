@@ -97,8 +97,8 @@ export default function AboutPage() {
     <div className="bg-site-white dark:bg-deep-navy-900 text-deep-navy-900 dark:text-site-gray-100">
       <div className="container py-12 md:py-16 px-4 md:px-6">
         <header className="text-center mb-12 md:mb-16">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 font-sans bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 via-teal-500 to-vibrant-gold-500">
-            About Dr. Diego F. Cuadros
+          <h1 className="text-4xl md:text-5xl font-bold mb-4 font-sans">
+            About <span className="bg-gradient-to-r from-slate-800 via-slate-700 to-slate-900 dark:from-slate-200 dark:via-slate-100 dark:to-slate-300 bg-clip-text text-transparent">Dr. Diego F. Cuadros</span>
           </h1>
           <p className="text-xl md:text-2xl text-teal-600 dark:text-teal-400 font-semibold font-sans">
             Epidemiologist, Health Geographer, and Data Scientist

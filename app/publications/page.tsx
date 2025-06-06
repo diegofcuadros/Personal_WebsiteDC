@@ -529,8 +529,15 @@ export default function PublicationsPage() {
           className="mb-6 text-center"
         >
           <p className="text-slate-600 dark:text-slate-400 font-sans">
-            Showing <span className="font-semibold text-teal-600 dark:text-teal-400">{filteredPublications.length}</span> of{" "}
-            <span className="font-semibold">{allPublications.length}</span> publications
+            Selected publications, for a full list of publications please visit my{" "}
+            <a 
+              href="https://scholar.google.com/citations?user=zMoJ8n4AAAAJ&hl=en" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-teal-600 dark:text-teal-400 hover:text-teal-700 dark:hover:text-teal-300 font-semibold underline transition-colors"
+            >
+              Google Scholar
+            </a>
           </p>
         </motion.div>
 

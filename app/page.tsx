@@ -174,7 +174,7 @@ export default function HomePage() {
           <Button
             asChild
             size="lg"
-            className="bg-deep-navy hover:bg-deep-navy/90 text-site-white dark:bg-site-white dark:hover:bg-site-white/90 dark:text-deep-navy font-sans"
+            className="bg-slate-900 hover:bg-slate-800 text-white dark:bg-slate-100 dark:hover:bg-slate-200 dark:text-slate-900 font-sans"
           >
             <Link href="/contact">
               Get In Touch <Mail className="ml-2 h-5 w-5" />
