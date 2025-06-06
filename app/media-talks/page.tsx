@@ -73,40 +73,40 @@ const talkTypes = [
 
 export default function MediaTalksPage() {
   return (
-    <div className="bg-site-white dark:bg-deep-navy text-deep-navy dark:text-site-gray">
+    <div className="bg-site-white dark:bg-slate-900">
       <div className="container py-12 md:py-16 px-4 md:px-6">
         <header className="text-center mb-12 md:mb-16">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 font-sans bg-clip-text text-transparent bg-gradient-to-r from-deep-navy via-teal to-vibrant-gold dark:from-site-white dark:via-teal dark:to-vibrant-gold">
+          <h1 className="text-4xl md:text-5xl font-bold mb-4 font-sans bg-clip-text text-transparent bg-gradient-to-r from-deep-navy via-teal to-vibrant-gold dark:from-slate-100 dark:via-teal-400 dark:to-yellow-400">
             Media & Talks
           </h1>
-          <p className="text-xl md:text-2xl text-teal dark:text-vibrant-gold font-semibold font-sans max-w-3xl mx-auto">
+          <p className="text-xl md:text-2xl text-teal-600 dark:text-teal-400 font-semibold font-sans max-w-3xl mx-auto">
             Sharing insights and engaging with the public, policymakers, and the scientific community.
           </p>
         </header>
 
         <section id="media-highlights" className="mb-12 md:mb-16">
-          <h2 className="text-3xl font-bold font-sans text-deep-navy dark:text-site-white mb-8 text-center">
+          <h2 className="text-3xl font-bold font-sans text-slate-900 dark:text-slate-100 mb-8 text-center">
             Media Highlights
           </h2>
           <div className="grid md:grid-cols-2 gap-6">
             {mediaHighlights.map((item) => (
               <Card
                 key={item.title}
-                className="flex flex-col bg-background/50 dark:bg-background/20 hover:shadow-lg transition-shadow"
+                className="flex flex-col bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 hover:shadow-lg transition-shadow"
               >
                 <CardHeader>
                   <div className="flex items-center mb-2">
-                    <item.icon className="h-6 w-6 mr-3 text-teal dark:text-vibrant-gold" />
-                    <CardTitle className="text-xl font-sans text-deep-navy dark:text-site-white">
+                    <item.icon className="h-6 w-6 mr-3 text-teal-600 dark:text-teal-400" />
+                    <CardTitle className="text-xl font-sans text-slate-900 dark:text-slate-100">
                       {item.title}
                     </CardTitle>
                   </div>
-                  <CardDescription className="font-serif text-sm text-deep-navy/70 dark:text-site-gray/70">
+                  <CardDescription className="font-serif text-sm text-slate-600 dark:text-slate-400">
                     {item.type} via {item.outlet} - {item.date}
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="flex-grow">
-                  <p className="font-serif text-sm text-deep-navy/80 dark:text-site-gray/80 leading-relaxed">
+                  <p className="font-serif text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
                     {item.description}
                   </p>
                 </CardContent>
@@ -115,7 +115,7 @@ export default function MediaTalksPage() {
                     <Link
                       href={item.link}
                       target="_blank"
-                      className="text-sm font-sans text-teal dark:text-vibrant-gold hover:underline"
+                      className="text-sm font-sans text-teal-600 dark:text-teal-400 hover:underline"
                     >
                       Read More &rarr;
                     </Link>
@@ -127,34 +127,34 @@ export default function MediaTalksPage() {
         </section>
 
         <section id="talks-presentations">
-          <h2 className="text-3xl font-bold font-sans text-deep-navy dark:text-site-white mb-8 text-center">
+          <h2 className="text-3xl font-bold font-sans text-slate-900 dark:text-slate-100 mb-8 text-center">
             Talks & Presentations
           </h2>
-          <p className="font-serif text-lg text-center text-deep-navy/80 dark:text-site-gray/80 mb-6">
+          <p className="font-serif text-lg text-center text-slate-700 dark:text-slate-300 mb-6">
             Dr. Cuadros frequently presents his research at national and international conferences, workshops, and
             public forums. Key venues include:
           </p>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
             {talkTypes.map((type) => (
-              <div key={type.name} className="flex items-center p-3 bg-site-gray/30 dark:bg-deep-navy/50 rounded-md">
-                <type.icon className="h-5 w-5 mr-2 text-teal dark:text-vibrant-gold" />
-                <span className="font-sans text-sm">{type.name}</span>
+              <div key={type.name} className="flex items-center p-3 bg-slate-100 dark:bg-slate-800 rounded-md">
+                <type.icon className="h-5 w-5 mr-2 text-teal-600 dark:text-teal-400" />
+                <span className="font-sans text-sm text-slate-800 dark:text-slate-200">{type.name}</span>
               </div>
             ))}
           </div>
-          <p className="font-serif text-lg text-center text-deep-navy/80 dark:text-site-gray/80">
+          <p className="font-serif text-lg text-center text-slate-700 dark:text-slate-300">
             (A detailed talks timeline will be added here.)
           </p>
 
-          <h3 className="text-2xl font-bold font-sans text-deep-navy dark:text-site-white mt-12 mb-6 text-center">
+          <h3 className="text-2xl font-bold font-sans text-slate-900 dark:text-slate-100 mt-12 mb-6 text-center">
             Featured Talks (Videos)
           </h3>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {featuredTalksVideos.map((item) => (
-              <div key={item.videoId} className="bg-site-gray-50 dark:bg-deep-navy-800 p-6 rounded-lg shadow-lg">
+              <div key={item.videoId} className="bg-slate-50 dark:bg-slate-800 p-6 rounded-lg shadow-lg border border-slate-200 dark:border-slate-700">
                 <YouTubeEmbed videoId={item.videoId} className="rounded-md overflow-hidden mb-4" />
-                <h4 className="text-lg font-semibold font-sans text-deep-navy dark:text-site-white mb-1">{item.title}</h4>
-                <p className="text-xs font-serif text-deep-navy/80 dark:text-site-gray/80">{item.description}</p>
+                <h4 className="text-lg font-semibold font-sans text-slate-900 dark:text-slate-100 mb-1">{item.title}</h4>
+                <p className="text-xs font-serif text-slate-700 dark:text-slate-300">{item.description}</p>
               </div>
             ))}
           </div>
