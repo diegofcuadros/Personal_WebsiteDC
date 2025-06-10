@@ -732,7 +732,7 @@ function ChapterContent({
               </div>
               
               <div className="flex items-center gap-3">
-                <Badge variant="secondary" className="text-xs font-medium px-3 py-1">
+                <Badge variant="secondary" className="text-xs font-medium px-3 py-1 text-black">
                   {chapter.type === "intro" ? "Introduction" : 
                    chapter.type === "conclusion" ? "Conclusion" : 
                    `Research Theme`}
