@@ -318,72 +318,109 @@ export default function StoryMap({ className = "" }: StoryMapProps) {
       aria-label="Interactive Research StoryMap"
       tabIndex={0}
     >
-      {/* Progress Bar Header */}
+            {/* Mobile-First Progress Bar Header */}
       <motion.div 
-        className="absolute top-2 left-2 right-2 md:top-4 md:left-4 md:right-4 z-30"
+        className="absolute top-1 left-1 right-1 md:top-4 md:left-4 md:right-4 z-30"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
       >
-        <Card className={`bg-white/95 dark:bg-slate-900/95 backdrop-blur-sm border-slate-200 dark:border-slate-700 shadow-lg ${currentChapter.color}`}>
-          <CardContent className="p-2 md:p-4">
-                          <div className="flex items-center justify-between mb-2 md:mb-3">
-                <div className="flex items-center gap-2 md:gap-3">
-                  <currentChapter.icon className="h-5 w-5 md:h-6 md:w-6 text-teal-600 dark:text-teal-400" />
-                  <h2 className="font-sans font-bold text-sm md:text-lg text-slate-900 dark:text-white">
-                    <span className="hidden md:inline">Global Health Through Geographic Intelligence</span>
-                    <span className="md:hidden">Research StoryMap</span>
-                  </h2>
+        {/* Mobile Compact Header */}
+        <div className="md:hidden">
+          <Card className="bg-white/98 dark:bg-slate-800/98 backdrop-blur-sm border-slate-200 dark:border-slate-600 shadow-md">
+            <CardContent className="p-2">
+              <div className="flex items-center justify-between mb-2">
+                <div className="flex items-center gap-2">
+                  <currentChapter.icon className="h-4 w-4 text-teal-600 dark:text-teal-300" />
+                  <span className="text-xs font-semibold text-slate-800 dark:text-slate-100">
+                    Chapter {activeChapter + 1}/{totalChapters}
+                  </span>
                 </div>
-                              <div className="flex items-center gap-1 md:gap-2">
+                <div className="flex items-center gap-1">
                   <Button
                     variant="ghost"
                     size="sm"
                     onClick={() => navigateToChapter(Math.max(0, activeChapter - 1))}
                     disabled={activeChapter === 0}
-                    className="h-7 w-7 md:h-8 md:w-8 p-0"
-                    aria-label="Previous chapter"
+                    className="h-6 w-6 p-0 text-slate-600 dark:text-slate-300"
                   >
-                    <ChevronUp className="h-3 w-3 md:h-4 md:w-4" />
+                    <ChevronUp className="h-3 w-3" />
                   </Button>
-                  <span className="text-xs md:text-sm text-slate-700 dark:text-slate-200 font-mono min-w-[2.5rem] md:min-w-[3rem] text-center">
-                    {activeChapter + 1}/{totalChapters}
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => navigateToChapter(Math.min(totalChapters - 1, activeChapter + 1))}
+                    disabled={activeChapter === totalChapters - 1}
+                    className="h-6 w-6 p-0 text-slate-600 dark:text-slate-300"
+                  >
+                    <ChevronDown className="h-3 w-3" />
+                  </Button>
+                </div>
+              </div>
+              <Progress value={scrollProgress} className="h-1.5 mb-2" />
+              <div className="text-center">
+                <Badge variant="secondary" className="text-xs px-2 py-0.5 bg-teal-100 dark:bg-teal-800 text-teal-700 dark:text-teal-200">
+                  {currentChapter.theme}
+                </Badge>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Desktop Header */}
+        <div className="hidden md:block">
+          <Card className={`bg-white/95 dark:bg-slate-800/95 backdrop-blur-sm border-slate-200 dark:border-slate-600 shadow-lg ${currentChapter.color}`}>
+            <CardContent className="p-4">
+              <div className="flex items-center justify-between mb-3">
+                <div className="flex items-center gap-3">
+                  <currentChapter.icon className="h-6 w-6 text-teal-600 dark:text-teal-300" />
+                  <h2 className="font-sans font-bold text-lg text-slate-900 dark:text-slate-100">
+                    Global Health Through Geographic Intelligence
+                  </h2>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => navigateToChapter(Math.max(0, activeChapter - 1))}
+                    disabled={activeChapter === 0}
+                    className="h-8 w-8 p-0"
+                  >
+                    <ChevronUp className="h-4 w-4" />
+                  </Button>
+                  <span className="text-sm text-slate-700 dark:text-slate-200 font-mono min-w-[3rem] text-center">
+                    {activeChapter + 1} / {totalChapters}
                   </span>
                   <Button
                     variant="ghost"
                     size="sm"
                     onClick={() => navigateToChapter(Math.min(totalChapters - 1, activeChapter + 1))}
                     disabled={activeChapter === totalChapters - 1}
-                    className="h-7 w-7 md:h-8 md:w-8 p-0"
-                    aria-label="Next chapter"
+                    className="h-8 w-8 p-0"
                   >
-                    <ChevronDown className="h-3 w-3 md:h-4 md:w-4" />
+                    <ChevronDown className="h-4 w-4" />
                   </Button>
                 </div>
-            </div>
-            
-            <Progress 
-              value={scrollProgress} 
-              className="h-2 md:h-3 mb-2 md:mb-3" 
-            />
-            
-                          <div className="flex items-center justify-between">
-                <div className="flex items-center gap-1 md:gap-2">
-                  <Badge variant="secondary" className="text-xs font-medium px-2 py-1">
+              </div>
+              <Progress value={scrollProgress} className="h-3 mb-3" />
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <Badge variant="secondary" className="text-xs font-medium px-3 py-1">
                     {currentChapter.theme}
                   </Badge>
                   {currentChapter.studyCount && (
-                    <Badge variant="outline" className="text-xs px-2 py-1 hidden sm:inline-flex">
+                    <Badge variant="outline" className="text-xs px-2 py-1">
                       {currentChapter.studyCount} Studies
                     </Badge>
                   )}
                 </div>
-                <p className="text-xs md:text-sm text-slate-700 dark:text-slate-200 truncate max-w-[8rem] md:max-w-md">
+                <p className="text-sm text-slate-700 dark:text-slate-200 truncate max-w-md">
                   {currentChapter.title}
                 </p>
               </div>
-          </CardContent>
-        </Card>
+            </CardContent>
+          </Card>
+        </div>
       </motion.div>
 
       {/* Enhanced Scroll Instruction & Controls */}
@@ -543,7 +580,7 @@ export default function StoryMap({ className = "" }: StoryMapProps) {
           {storyChapters.map((chapter, index) => (
             <div
               key={chapter.id}
-              className="h-screen flex items-center justify-start px-3 py-4 md:px-16 md:py-8"
+              className="h-screen flex items-center justify-center px-2 py-6 md:px-16 md:py-8"
             >
               <ChapterContent 
                 chapter={chapter} 
@@ -583,65 +620,125 @@ function ChapterContent({
       transition={{ duration: 0.8, ease: "easeOut" }}
       className="max-w-4xl w-full"
     >
-      <Card className={`bg-white/95 dark:bg-slate-900/95 backdrop-blur-lg shadow-2xl ${chapter.color}`}>
-        <CardHeader className="pb-2 md:pb-4">
-          <div className="flex items-center gap-2 md:gap-4 mb-2 md:mb-4">
-            <div className="p-2 md:p-3 rounded-full bg-white dark:bg-slate-800 shadow-md">
-              <IconComponent className="h-6 w-6 md:h-8 md:w-8 text-teal-600 dark:text-teal-400" />
-            </div>
-            
-            <div className="flex flex-col md:flex-row md:items-center gap-1 md:gap-3">
-              <Badge variant="secondary" className="text-xs font-medium px-2 md:px-3 py-1 w-fit">
+      {/* Mobile Card Design */}
+      <div className="md:hidden">
+        <Card className="bg-white/98 dark:bg-slate-800/98 backdrop-blur-lg shadow-lg border-slate-200 dark:border-slate-600">
+          <CardHeader className="pb-3">
+            <div className="text-center mb-3">
+              <div className="inline-flex p-3 rounded-full bg-teal-100 dark:bg-teal-800 mb-3">
+                <IconComponent className="h-8 w-8 text-teal-600 dark:text-teal-300" />
+              </div>
+              <Badge variant="secondary" className="text-xs px-3 py-1 bg-teal-100 dark:bg-teal-700 text-teal-700 dark:text-teal-200">
                 {chapter.type === "intro" ? "Introduction" : 
                  chapter.type === "conclusion" ? "Conclusion" : 
-                 `Research Theme`}
+                 `Theme ${chapterIndex - 1}`}
               </Badge>
-              <span className="text-xs text-slate-600 dark:text-slate-300 font-mono">
-                Chapter {chapterIndex} of {totalChapters}
-              </span>
             </div>
-          </div>
+            <CardTitle className="text-lg font-bold text-slate-900 dark:text-slate-100 mb-2 leading-tight text-center">
+              {chapter.title}
+            </CardTitle>
+            <p className="text-sm text-slate-600 dark:text-slate-300 font-medium leading-relaxed text-center">
+              {chapter.subtitle}
+            </p>
+          </CardHeader>
+        </Card>
+      </div>
 
-          <CardTitle className="text-xl md:text-3xl lg:text-4xl font-bold text-slate-900 dark:text-white mb-2 md:mb-3 leading-tight">
-            {chapter.title}
-          </CardTitle>
-          <p className="text-base md:text-xl text-slate-600 dark:text-slate-300 font-medium leading-relaxed">
-            {chapter.subtitle}
-          </p>
-        </CardHeader>
-        
-        <CardContent className="space-y-4 md:space-y-6">
+      {/* Desktop Card Design */}
+      <div className="hidden md:block">
+        <Card className={`bg-white/95 dark:bg-slate-800/95 backdrop-blur-lg shadow-2xl ${chapter.color}`}>
+          <CardHeader className="pb-4">
+            <div className="flex items-center gap-4 mb-4">
+              <div className="p-3 rounded-full bg-white dark:bg-slate-700 shadow-md">
+                <IconComponent className="h-8 w-8 text-teal-600 dark:text-teal-300" />
+              </div>
+              
+              <div className="flex items-center gap-3">
+                <Badge variant="secondary" className="text-xs font-medium px-3 py-1">
+                  {chapter.type === "intro" ? "Introduction" : 
+                   chapter.type === "conclusion" ? "Conclusion" : 
+                   `Research Theme`}
+                </Badge>
+                <span className="text-xs text-slate-600 dark:text-slate-300 font-mono">
+                  Chapter {chapterIndex} of {totalChapters}
+                </span>
+              </div>
+            </div>
+
+            <CardTitle className="text-3xl lg:text-4xl font-bold text-slate-900 dark:text-slate-100 mb-3 leading-tight">
+              {chapter.title}
+            </CardTitle>
+            <p className="text-xl text-slate-600 dark:text-slate-300 font-medium leading-relaxed">
+              {chapter.subtitle}
+            </p>
+          </CardHeader>
+                 </Card>
+       </div>
+
+       {/* Content for both mobile and desktop */}
+       <div className="mt-4 md:mt-0">
+         <CardContent className="space-y-4 md:space-y-6 p-3 md:p-6">
           {chapter.type === "intro" && (
             <div className="space-y-4 md:space-y-6">
-              {/* Instructions Card */}
-              <Card className="bg-gradient-to-r from-teal-50 to-blue-50 dark:from-teal-900/30 dark:to-blue-900/30 border-teal-200 dark:border-teal-700">
-                <CardContent className="p-4 md:p-6">
-                  <div className="flex items-start gap-3">
-                    <div className="p-2 rounded-full bg-teal-100 dark:bg-teal-800">
-                      <ChevronDown className="h-5 w-5 text-teal-600 dark:text-teal-400" />
+              {/* Mobile Instructions */}
+              <div className="md:hidden">
+                <Card className="bg-gradient-to-r from-teal-50 to-blue-50 dark:from-teal-800/40 dark:to-blue-800/40 border-teal-200 dark:border-teal-600">
+                  <CardContent className="p-4 text-center">
+                    <div className="inline-flex p-2 rounded-full bg-teal-100 dark:bg-teal-700 mb-3">
+                      <ChevronDown className="h-5 w-5 text-teal-600 dark:text-teal-200" />
                     </div>
-                    <div>
-                      <h3 className="font-semibold text-slate-900 dark:text-white mb-2">
-                        📍 How to Explore This StoryMap
-                      </h3>
-                      <div className="space-y-2 text-sm md:text-base text-slate-700 dark:text-slate-200">
-                        <p>
-                          <strong>Scroll down</strong> to journey through 8 thematic chapters covering 20 groundbreaking studies
-                        </p>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs md:text-sm text-slate-600 dark:text-slate-300">
-                          <div>• 🖱️ <strong>Mouse wheel</strong> or touch scroll</div>
-                          <div>• ⌨️ <strong>Arrow keys</strong> for navigation</div>
-                          <div>• 🗺️ <strong>Map markers</strong> show study locations</div>
-                          <div>• 📊 <strong>Progress bar</strong> tracks your journey</div>
+                    <h3 className="font-bold text-slate-900 dark:text-slate-100 mb-2">
+                      📍 How to Explore
+                    </h3>
+                    <p className="text-sm text-slate-700 dark:text-slate-200 mb-3">
+                      <strong>Scroll down</strong> through 8 chapters • 20 studies
+                    </p>
+                    <div className="flex flex-wrap justify-center gap-2 text-xs">
+                      <span className="px-2 py-1 bg-teal-100 dark:bg-teal-700 rounded text-teal-700 dark:text-teal-200">
+                        Touch scroll
+                      </span>
+                      <span className="px-2 py-1 bg-teal-100 dark:bg-teal-700 rounded text-teal-700 dark:text-teal-200">
+                        Map markers
+                      </span>
+                    </div>
+                    <p className="text-teal-600 dark:text-teal-300 font-semibold mt-3 text-sm">
+                      Start scrolling! ⬇️
+                    </p>
+                  </CardContent>
+                </Card>
+              </div>
+
+              {/* Desktop Instructions */}
+              <div className="hidden md:block">
+                <Card className="bg-gradient-to-r from-teal-50 to-blue-50 dark:from-teal-900/30 dark:to-blue-900/30 border-teal-200 dark:border-teal-700">
+                  <CardContent className="p-6">
+                    <div className="flex items-start gap-3">
+                      <div className="p-2 rounded-full bg-teal-100 dark:bg-teal-800">
+                        <ChevronDown className="h-5 w-5 text-teal-600 dark:text-teal-300" />
+                      </div>
+                      <div>
+                        <h3 className="font-semibold text-slate-900 dark:text-slate-100 mb-2">
+                          📍 How to Explore This StoryMap
+                        </h3>
+                        <div className="space-y-2 text-base text-slate-700 dark:text-slate-200">
+                          <p>
+                            <strong>Scroll down</strong> to journey through 8 thematic chapters covering 20 groundbreaking studies
+                          </p>
+                          <div className="grid grid-cols-2 gap-2 text-sm text-slate-600 dark:text-slate-300">
+                            <div>• 🖱️ <strong>Mouse wheel</strong> or touch scroll</div>
+                            <div>• ⌨️ <strong>Arrow keys</strong> for navigation</div>
+                            <div>• 🗺️ <strong>Map markers</strong> show study locations</div>
+                            <div>• 📊 <strong>Progress bar</strong> tracks your journey</div>
+                          </div>
+                          <p className="text-teal-600 dark:text-teal-300 font-medium mt-3">
+                            Ready to explore? Start scrolling! ⬇️
+                          </p>
                         </div>
-                        <p className="text-teal-600 dark:text-teal-400 font-medium mt-3">
-                          Ready to explore? Start scrolling! ⬇️
-                        </p>
                       </div>
                     </div>
-                  </div>
-                </CardContent>
-              </Card>
+                  </CardContent>
+                </Card>
+              </div>
 
               <p className="text-slate-700 dark:text-slate-200 leading-relaxed text-sm md:text-lg">
                 From HIV hotspots in sub-Saharan Africa to opioid epidemics in rural America, 
@@ -692,10 +789,10 @@ function ChapterContent({
           {chapter.type === "theme" && (
             <div className="space-y-4 md:space-y-6">
               <div className="flex items-center gap-3 md:gap-4 p-3 md:p-4 bg-white/70 dark:bg-slate-800/70 rounded-xl">
-                <MapPin className="h-5 w-5 md:h-6 md:w-6 text-teal-600 flex-shrink-0" />
+                <MapPin className="h-5 w-5 md:h-6 md:w-6 text-teal-600 dark:text-teal-300 flex-shrink-0" />
                 <div className="flex-grow">
                   <div className="flex flex-col md:flex-row md:items-center gap-1 md:gap-3 mb-1">
-                    <span className="font-bold text-teal-700 dark:text-teal-300 text-base md:text-lg">
+                    <span className="font-bold text-teal-700 dark:text-teal-200 text-base md:text-lg">
                       {chapter.studyCount} Studies
                     </span>
                     <span className="text-xs md:text-sm text-slate-600 dark:text-slate-300">
@@ -708,7 +805,7 @@ function ChapterContent({
                     </p>
                   )}
                 </div>
-                              </div>
+              </div>
               
               <p className="text-slate-700 dark:text-slate-200 leading-relaxed text-sm md:text-lg">
                 {chapter.theme === "HIV/AIDS" && 
@@ -733,10 +830,10 @@ function ChapterContent({
 
               <div className="p-5 bg-white/70 dark:bg-slate-800/70 rounded-xl">
                 <h4 className="font-bold text-slate-900 dark:text-slate-100 mb-3 flex items-center gap-2">
-                  <Microscope className="h-5 w-5 text-teal-600" />
+                  <Microscope className="h-5 w-5 text-teal-600 dark:text-teal-300" />
                   Key Contributions & Impact:
                 </h4>
-                <ul className="space-y-2 text-slate-700 dark:text-slate-300">
+                <ul className="space-y-2 text-slate-700 dark:text-slate-200">
                   {chapter.theme === "HIV/AIDS" && (
                     <>
                       <li className="flex items-start gap-2">
@@ -841,12 +938,12 @@ function ChapterContent({
                   <h4 className="font-bold text-slate-900 dark:text-slate-100">Research Excellence:</h4>
                   <div className="space-y-2 text-sm">
                     <div className="flex justify-between">
-                      <span className="text-slate-600 dark:text-slate-400">Top-tier Journals:</span>
-                      <span className="text-teal-600 dark:text-teal-400 font-semibold">Science, Nature, Lancet</span>
+                      <span className="text-slate-600 dark:text-slate-300">Top-tier Journals:</span>
+                      <span className="text-teal-600 dark:text-teal-300 font-semibold">Science, Nature, Lancet</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-slate-600 dark:text-slate-400">Geographic Scope:</span>
-                      <span className="text-teal-600 dark:text-teal-400 font-semibold">6 continents, 15+ countries</span>
+                      <span className="text-slate-600 dark:text-slate-300">Geographic Scope:</span>
+                      <span className="text-teal-600 dark:text-teal-300 font-semibold">6 continents, 15+ countries</span>
                     </div>
                   </div>
                 </div>
@@ -854,27 +951,27 @@ function ChapterContent({
                   <h4 className="font-bold text-slate-900 dark:text-slate-100">Global Impact:</h4>
                   <div className="space-y-2 text-sm">
                     <div className="flex justify-between">
-                      <span className="text-slate-600 dark:text-slate-400">Health Conditions:</span>
-                      <span className="text-teal-600 dark:text-teal-400 font-semibold">HIV, COVID, TB, NCDs</span>
+                      <span className="text-slate-600 dark:text-slate-300">Health Conditions:</span>
+                      <span className="text-teal-600 dark:text-teal-300 font-semibold">HIV, COVID, TB, NCDs</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-slate-600 dark:text-slate-400">Future Direction:</span>
-                      <span className="text-teal-600 dark:text-teal-400 font-semibold">AI-driven intelligence</span>
+                      <span className="text-slate-600 dark:text-slate-300">Future Direction:</span>
+                      <span className="text-teal-600 dark:text-teal-300 font-semibold">AI-driven intelligence</span>
                     </div>
                   </div>
                 </div>
               </div>
 
               <div className="p-5 bg-gradient-to-r from-teal-50 to-blue-50 dark:from-teal-900/20 dark:to-blue-900/20 rounded-xl">
-                <blockquote className="text-slate-700 dark:text-slate-300 text-center text-lg italic font-medium">
+                <blockquote className="text-slate-700 dark:text-slate-200 text-center text-lg italic font-medium">
                   "The future of global health lies in understanding not just what diseases affect us, 
                   but where they affect us—and why geography matters for every intervention we design."
                 </blockquote>
               </div>
             </div>
           )}
-        </CardContent>
-      </Card>
-    </motion.div>
-  )
-} 
+          </CardContent>
+        </div>
+      </motion.div>
+    )
+  } 
