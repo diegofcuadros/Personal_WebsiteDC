@@ -524,7 +524,7 @@ export default function StoryMap({ className = "" }: StoryMapProps) {
                      <p className="text-sm font-bold text-slate-900 dark:text-slate-100 mb-1">
                        🚀 Scroll Down to Begin Your Journey
                      </p>
-                     <p className="text-xs text-slate-600 dark:text-slate-200 mb-2">
+                     <p className="text-xs text-slate-600 dark:text-blue-300 mb-2">
                        Explore {totalChapters} chapters • 20 studies • 6 research themes
                      </p>
                      <div className="flex flex-wrap gap-2 text-xs">
@@ -798,17 +798,17 @@ function ChapterContent({
                         <h3 className="font-semibold text-slate-900 dark:text-slate-100 mb-2">
                           📍 How to Explore This StoryMap
                         </h3>
-                                                  <div className="space-y-2 text-base text-slate-700 dark:text-slate-100">
+                                                  <div className="space-y-2 text-base text-slate-700 dark:text-blue-200">
                           <p>
                             <strong>Scroll down</strong> to journey through 8 thematic chapters covering 20 groundbreaking studies
                           </p>
-                                                      <div className="grid grid-cols-2 gap-2 text-sm text-slate-600 dark:text-slate-200">
+                                                      <div className="grid grid-cols-2 gap-2 text-sm text-slate-600 dark:text-blue-300">
                             <div>• 🖱️ <strong>Mouse wheel</strong> or touch scroll</div>
                             <div>• ⌨️ <strong>Arrow keys</strong> for navigation</div>
                             <div>• 🗺️ <strong>Map markers</strong> show study locations</div>
                             <div>• 📊 <strong>Progress bar</strong> tracks your journey</div>
                           </div>
-                                                     <p className="text-teal-600 dark:text-teal-200 font-medium mt-3">
+                                                     <p className="text-teal-600 dark:text-blue-200 font-medium mt-3">
                              Ready to explore? Start scrolling! ⬇️
                            </p>
                         </div>
@@ -818,7 +818,7 @@ function ChapterContent({
                 </Card>
               </div>
 
-              <p className="text-slate-700 dark:text-slate-100 leading-relaxed text-sm md:text-lg">
+              <p className="text-slate-700 dark:text-blue-200 leading-relaxed text-sm md:text-lg">
                 From HIV hotspots in sub-Saharan Africa to opioid epidemics in rural America, 
                 spatial epidemiology reveals the hidden geographic patterns that drive health outcomes. 
                 This is the story of <strong>20 groundbreaking studies</strong> that have shaped our understanding 
@@ -829,24 +829,24 @@ function ChapterContent({
               <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-6 p-3 md:p-6 bg-white/70 dark:bg-slate-800/70 rounded-xl">
                 <div className="text-center">
                   <div className="text-xl md:text-3xl font-bold text-teal-600 dark:text-teal-400">15+</div>
-                  <div className="text-xs md:text-sm text-slate-600 dark:text-slate-200 font-medium">Countries</div>
+                  <div className="text-xs md:text-sm text-slate-600 dark:text-blue-300 font-medium">Countries</div>
                 </div>
                 <div className="text-center">
                   <div className="text-xl md:text-3xl font-bold text-teal-600 dark:text-teal-400">2011-25</div>
-                  <div className="text-xs md:text-sm text-slate-600 dark:text-slate-200 font-medium">Period</div>
+                  <div className="text-xs md:text-sm text-slate-600 dark:text-blue-300 font-medium">Period</div>
                 </div>
                 <div className="text-center">
                   <div className="text-xl md:text-3xl font-bold text-teal-600 dark:text-teal-400">6</div>
-                  <div className="text-xs md:text-sm text-slate-600 dark:text-slate-200 font-medium">Themes</div>
+                  <div className="text-xs md:text-sm text-slate-600 dark:text-blue-300 font-medium">Themes</div>
                 </div>
                 <div className="text-center">
                   <div className="text-xl md:text-3xl font-bold text-teal-600 dark:text-teal-400">20</div>
-                  <div className="text-xs md:text-sm text-slate-600 dark:text-slate-200 font-medium">Studies</div>
+                  <div className="text-xs md:text-sm text-slate-600 dark:text-blue-300 font-medium">Studies</div>
                 </div>
               </div>
 
               <div className="p-4 bg-gradient-to-r from-teal-50 to-blue-50 dark:from-teal-900/20 dark:to-blue-900/20 rounded-lg">
-                <p className="text-slate-700 dark:text-slate-200 text-center italic mb-3">
+                <p className="text-slate-700 dark:text-blue-200 text-center italic mb-3">
                   "Geographic intelligence transforms health data into actionable insights, 
                   revealing where interventions are needed most."
                 </p>
@@ -885,7 +885,7 @@ function ChapterContent({
                 </div>
               </div>
               
-                              <p className="text-slate-700 dark:text-slate-100 leading-relaxed text-sm md:text-lg">
+                                                                <p className="text-slate-700 dark:text-blue-200 leading-relaxed text-sm md:text-lg">
                 {chapter.theme === "HIV/AIDS" && 
                   "The foundational body of work that established spatial epidemiology as essential for HIV prevention and control. From identifying transmission hotspots to evaluating the UNAIDS 95-95-95 targets, these studies have guided billions in prevention investments across sub-Saharan Africa, revealing the critical importance of geographic targeting in epidemic response."
                 }
@@ -1003,7 +1003,7 @@ function ChapterContent({
 
           {chapter.type === "conclusion" && (
             <div className="space-y-4 md:space-y-6">
-                              <p className="text-slate-700 dark:text-slate-100 leading-relaxed text-sm md:text-lg">
+                              <p className="text-slate-700 dark:text-blue-200 leading-relaxed text-sm md:text-lg">
                   These 20 studies represent more than academic achievement—they represent <strong>lives saved</strong>, 
                   <strong>policies informed</strong>, and <strong>communities protected</strong> through the power of geographic intelligence. 
                 From identifying HIV hotspots that guided billion-dollar prevention programs to tracking 
