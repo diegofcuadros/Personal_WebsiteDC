@@ -7,7 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Progress } from "@/components/ui/progress"
 import { Button } from "@/components/ui/button"
-import { ChevronDown, MapPin, BookOpen, Award, Globe, Microscope, Heart, Shield, Calendar, ChevronUp, Pause, Play, Menu } from "lucide-react"
+import { ChevronDown, MapPin, BookOpen, Award, Globe, Microscope, Heart, Shield, Calendar, ChevronUp, Pause, Play, Menu, Lightbulb, Users } from "lucide-react"
 
 // Import Leaflet CSS
 import "leaflet/dist/leaflet.css"
@@ -698,8 +698,9 @@ function ChapterContent({
       transition={{ duration: 0.8, ease: "easeOut" }}
       className="max-w-4xl w-full"
     >
-      {/* Mobile Card Design */}
+      {/* --- Main Card Container --- */}
       <div className="md:hidden">
+        {/* Mobile Card Design */}
         <Card className="bg-white/98 dark:bg-slate-800/98 backdrop-blur-lg shadow-lg border-slate-200 dark:border-slate-600">
           <CardHeader className="pb-3">
             <div className="text-center mb-3">
@@ -721,9 +722,8 @@ function ChapterContent({
           </CardHeader>
         </Card>
       </div>
-
-      {/* Desktop Card Design */}
       <div className="hidden md:block">
+        {/* Desktop Card Design */}
         <Card className={`bg-white/95 dark:bg-slate-800/95 backdrop-blur-lg shadow-2xl ${chapter.color}`}>
           <CardHeader className="pb-4">
             <div className="flex items-center gap-4 mb-4">
@@ -750,16 +750,16 @@ function ChapterContent({
               {chapter.subtitle}
             </p>
           </CardHeader>
-                 </Card>
-       </div>
+        </Card>
+      </div>
 
-       {/* Content for both mobile and desktop */}
-       <div className="mt-4 md:mt-0">
-         <CardContent className="space-y-4 md:space-y-6 p-3 md:p-6">
+       {/* --- Content for both mobile and desktop --- */}
+      <div className="mt-4 md:mt-0">
+        <CardContent className="space-y-4 md:space-y-6 p-0 md:p-6">
           {chapter.type === "intro" && (
             <div className="space-y-4 md:space-y-6">
               {/* Mobile Instructions */}
-              <div className="md:hidden">
+              <div className="md:hidden p-3">
                 <Card className="bg-gradient-to-r from-teal-50 to-blue-50 dark:from-teal-800/40 dark:to-blue-800/40 border-teal-200 dark:border-teal-600">
                   <CardContent className="p-4 text-center">
                     <div className="inline-flex p-2 rounded-full bg-teal-100 dark:bg-teal-700 mb-3">
@@ -768,14 +768,14 @@ function ChapterContent({
                     <h3 className="font-bold text-slate-900 dark:text-slate-100 mb-2">
                       📍 How to Explore
                     </h3>
-                                            <p className="text-sm text-slate-700 dark:text-slate-100 mb-3">
-                      <strong>Scroll down</strong> through 8 chapters • 20 studies
+                    <p className="text-sm text-slate-700 dark:text-slate-200 mb-3">
+                      <strong>Scroll down</strong> through {totalChapters} chapters • 20 studies
                     </p>
                     <div className="flex flex-wrap justify-center gap-2 text-xs">
-                      <span className="px-2 py-1 bg-teal-100 dark:bg-teal-700 rounded text-teal-700 dark:text-teal-200">
+                      <span className="px-2 py-1 bg-teal-100 dark:bg-teal-800 rounded text-teal-700 dark:text-teal-200">
                         Touch scroll
                       </span>
-                      <span className="px-2 py-1 bg-teal-100 dark:bg-teal-700 rounded text-teal-700 dark:text-teal-200">
+                      <span className="px-2 py-1 bg-teal-100 dark:bg-teal-800 rounded text-teal-700 dark:text-teal-200">
                         Map markers
                       </span>
                     </div>
@@ -788,7 +788,7 @@ function ChapterContent({
 
               {/* Desktop Instructions */}
               <div className="hidden md:block">
-                <div className="bg-white/10 dark:bg-slate-900/30 backdrop-blur-sm p-6 rounded-lg border border-white/20">
+                <div className="bg-white/10 dark:bg-black/30 backdrop-blur-md p-6 rounded-lg border border-white/20">
                   <div className="flex items-start gap-3">
                     <div className="p-2 rounded-full bg-teal-100 dark:bg-teal-800">
                       <ChevronDown className="h-5 w-5 text-teal-600 dark:text-teal-300" />
@@ -797,27 +797,27 @@ function ChapterContent({
                       <h3 className="font-semibold text-slate-900 dark:text-slate-100 mb-2">
                         📍 How to Explore This StoryMap
                       </h3>
-                                                <div className="space-y-2 text-base text-slate-700 dark:text-blue-400">
+                      <div className="space-y-2 text-base text-slate-900 dark:text-slate-200">
                         <p>
-                          <strong>Scroll down</strong> to journey through 8 thematic chapters covering 20 groundbreaking studies
+                          <strong>Scroll down</strong> to journey through {totalChapters} thematic chapters covering 20 groundbreaking studies
                         </p>
-                                                    <div className="grid grid-cols-2 gap-2 text-sm text-slate-600 dark:text-blue-500">
+                        <div className="grid grid-cols-2 gap-2 text-sm text-slate-800 dark:text-slate-300">
                           <div>• 🖱️ <strong>Mouse wheel</strong> or touch scroll</div>
                           <div>• ⌨️ <strong>Arrow keys</strong> for navigation</div>
                           <div>• 🗺️ <strong>Map markers</strong> show study locations</div>
                           <div>• 📊 <strong>Progress bar</strong> tracks your journey</div>
                         </div>
-                                                   <p className="text-teal-600 dark:text-blue-400 font-medium mt-3">
-                             Ready to explore? Start scrolling! ⬇️
-                           </p>
+                        <p className="text-teal-500 dark:text-teal-300 font-medium mt-3">
+                           Ready to explore? Start scrolling! ⬇️
+                        </p>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div className="bg-white/10 dark:bg-slate-900/30 backdrop-blur-sm p-4 rounded-lg border border-white/20">
-                <p className="text-slate-700 dark:text-blue-400 leading-relaxed text-sm md:text-lg">
+              <div className="bg-white/10 dark:bg-black/30 backdrop-blur-md p-4 rounded-lg border border-white/20 m-3 md:m-0">
+                <p className="text-slate-900 dark:text-slate-200 leading-relaxed text-sm md:text-lg">
                   From HIV hotspots in sub-Saharan Africa to opioid epidemics in rural America, 
                   spatial epidemiology reveals the hidden geographic patterns that drive health outcomes. 
                   This is the story of <strong>20 groundbreaking studies</strong> that have shaped our understanding 
@@ -829,38 +829,36 @@ function ChapterContent({
               <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-6 p-3 md:p-6 bg-white/70 dark:bg-slate-800/70 rounded-xl">
                 <div className="text-center">
                   <div className="text-xl md:text-3xl font-bold text-teal-600 dark:text-teal-400">15+</div>
-                  <div className="text-xs md:text-sm text-slate-600 dark:text-blue-500 font-medium">Countries</div>
+                  <div className="text-xs md:text-sm text-slate-700 dark:text-slate-300 font-medium">Countries</div>
                 </div>
                 <div className="text-center">
                   <div className="text-xl md:text-3xl font-bold text-teal-600 dark:text-teal-400">2011-25</div>
-                  <div className="text-xs md:text-sm text-slate-600 dark:text-blue-500 font-medium">Period</div>
+                  <div className="text-xs md:text-sm text-slate-700 dark:text-slate-300 font-medium">Period</div>
                 </div>
                 <div className="text-center">
                   <div className="text-xl md:text-3xl font-bold text-teal-600 dark:text-teal-400">6</div>
-                  <div className="text-xs md:text-sm text-slate-600 dark:text-blue-500 font-medium">Themes</div>
+                  <div className="text-xs md:text-sm text-slate-700 dark:text-slate-300 font-medium">Themes</div>
                 </div>
                 <div className="text-center">
                   <div className="text-xl md:text-3xl font-bold text-teal-600 dark:text-teal-400">20</div>
-                  <div className="text-xs md:text-sm text-slate-600 dark:text-blue-500 font-medium">Studies</div>
+                  <div className="text-xs md:text-sm text-slate-700 dark:text-slate-300 font-medium">Studies</div>
                 </div>
               </div>
 
-              <div className="p-4 bg-gradient-to-r from-teal-50 to-blue-50 dark:from-teal-900/20 dark:to-blue-900/20 rounded-lg">
-                <div className="bg-white/10 dark:bg-slate-900/30 backdrop-blur-sm p-4 rounded-lg border border-white/20">
-                  <p className="text-slate-700 dark:text-blue-400 text-center italic mb-3">
-                    "Geographic intelligence transforms health data into actionable insights, 
-                    revealing where interventions are needed most."
-                  </p>
-                  <div className="text-center">
-                    <motion.div
-                      animate={{ y: [0, 5, 0] }}
-                      transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                      className="inline-flex items-center gap-2 text-teal-600 dark:text-teal-400 font-medium text-sm"
-                    >
-                      <span>Continue scrolling to explore each theme</span>
-                      <ChevronDown className="h-4 w-4" />
-                    </motion.div>
-                  </div>
+              <div className="bg-white/10 dark:bg-black/30 backdrop-blur-md p-4 rounded-lg border border-white/20 m-3 md:m-0">
+                <p className="text-slate-900 dark:text-slate-200 text-center italic mb-3">
+                  "Geographic intelligence transforms health data into actionable insights, 
+                  revealing where interventions are needed most."
+                </p>
+                <div className="text-center">
+                  <motion.div
+                    animate={{ y: [0, 5, 0] }}
+                    transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                    className="inline-flex items-center gap-2 text-teal-500 dark:text-teal-400 font-medium text-sm"
+                  >
+                    <span>Continue scrolling to explore each theme</span>
+                    <ChevronDown className="h-4 w-4" />
+                  </motion.div>
                 </div>
               </div>
             </div>
@@ -875,20 +873,20 @@ function ChapterContent({
                     <span className="font-bold text-teal-700 dark:text-teal-200 text-base md:text-lg">
                       {chapter.studyCount} Studies
                     </span>
-                                          <span className="text-xs md:text-sm text-slate-600 dark:text-slate-200">
-                        in {chapter.regions}
-                      </span>
-                    </div>
-                    {chapter.keyInsight && (
-                      <p className="text-xs md:text-sm text-slate-600 dark:text-slate-200 italic">
-                        Key: {chapter.keyInsight}
-                      </p>
-                    )}
+                    <span className="text-xs md:text-sm text-slate-600 dark:text-slate-300">
+                      in {chapter.regions}
+                    </span>
+                  </div>
+                  {chapter.keyInsight && (
+                    <p className="text-xs md:text-sm text-slate-600 dark:text-slate-300 italic">
+                      Key: {chapter.keyInsight}
+                    </p>
+                  )}
                 </div>
               </div>
               
-              <div className="bg-white/10 dark:bg-slate-900/30 backdrop-blur-sm p-4 rounded-lg border border-white/20">
-                <p className="text-slate-700 dark:text-blue-400 leading-relaxed text-sm md:text-lg">
+              <div className="bg-white/10 dark:bg-black/30 backdrop-blur-md p-4 rounded-lg border border-white/20 m-3 md:m-0">
+                <p className="text-slate-900 dark:text-slate-200 leading-relaxed text-sm md:text-lg">
                   {chapter.theme === "HIV/AIDS" && 
                     "The foundational body of work that established spatial epidemiology as essential for HIV prevention and control. From identifying transmission hotspots to evaluating the UNAIDS 95-95-95 targets, these studies have guided billions in prevention investments across sub-Saharan Africa, revealing the critical importance of geographic targeting in epidemic response."
                   }
@@ -899,10 +897,10 @@ function ChapterContent({
                     "Mapping America's evolving opioid crisis revealed shifting geographic patterns of overdose mortality, identifying new hotspots and vulnerable populations as the epidemic evolved from prescription opioids to heroin to synthetic fentanyl. This 15-year analysis of substance use disorder mortality identified 27 distinct hotspot regions and revealed the epidemic's eastward migration with pronounced racial and geographic disparities."
                   }
                   {chapter.theme === "Infectious Diseases" && 
-                    "Beyond HIV and COVID, spatial analysis tackles diverse infectious disease challenges: tuberculosis transmission networks in Latin American prisons, neglected tropical diseases linked to environmental change in Colombia, hepatitis C elimination in Egypt, and emerging zoonotic threats predicted through artificial intelligence and satellite data in China."
+                    "Beyond well-known pandemics, geographic intelligence is vital for controlling other infectious diseases like tuberculosis, leishmaniasis, and hepatitis. By mapping environmental factors, social conditions, and pathogen genetics, this research has pinpointed transmission drivers in diverse settings from the Amazon rainforest to urban centers in Asia and Africa, guiding targeted public health campaigns."
                   }
                   {chapter.theme === "NCDs & Social" && 
-                    "Expanding the geographic lens beyond infectious diseases reveals how non-communicable diseases and social determinants cluster across space. District-level diabetes mapping across India identified hotspots and sociodemographic correlates, while food insecurity analysis in South Africa revealed its geographic relationship with depression risk, demonstrating the complex spatial relationships between social determinants and health outcomes."
+                    "The burden of non-communicable diseases (NCDs) and their social determinants varies significantly by place. This research uncovers the geographic nexus of issues like food insecurity, mental health, and access to care for chronic conditions. These studies from India and South Africa highlight how mapping social and environmental factors is critical for designing equitable health systems."
                   }
                   {chapter.theme === "Methods" && 
                     "Advancing global health requires continuous innovation in our analytical tools. This work focuses on developing next-generation spatial methods, including integrating artificial intelligence with geographic data (GeoAI) to create more powerful predictive models and surveillance systems that can anticipate and respond to health crises more effectively."
@@ -910,105 +908,99 @@ function ChapterContent({
                 </p>
               </div>
 
-              <div className="p-5 bg-white/70 dark:bg-slate-800/70 rounded-xl">
-                <h4 className="font-bold text-slate-900 dark:text-slate-100 mb-3 flex items-center gap-2">
-                  <Microscope className="h-5 w-5 text-teal-600 dark:text-teal-300" />
-                  Key Contributions & Impact:
-                </h4>
-                                  <ul className="space-y-2 text-slate-700 dark:text-slate-100">
-                  {chapter.theme === "HIV/AIDS" && (
-                    <>
-                      <li className="flex items-start gap-2">
-                        <span className="text-teal-600 font-bold">•</span>
-                        <span>Established HIV hotspot identification methodologies used globally</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <span className="text-teal-600 font-bold">•</span>
-                        <span>Revealed co-infection synergies (HIV-malaria) doubling transmission risk</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <span className="text-teal-600 font-bold">•</span>
-                        <span>Mapped UNAIDS 95-95-95 target progress across countries</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <span className="text-teal-600 font-bold">•</span>
-                        <span>Integrated HIV-NCD convergent epidemics for health system planning</span>
-                      </li>
-                    </>
-                  )}
-                  {chapter.theme === "COVID-19" && (
-                    <>
-                      <li className="flex items-start gap-2">
-                        <span className="text-teal-600 font-bold">•</span>
-                        <span>Continental-scale genomic surveillance across Africa (Science journal)</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <span className="text-teal-600 font-bold">•</span>
-                        <span>Urban-rural pandemic dynamics revealing distinct transmission patterns</span>
-                      </li>
-                    </>
-                  )}
-                  {chapter.theme === "Substance Use" && (
-                    <>
-                      <li className="flex items-start gap-2">
-                        <span className="text-teal-600 font-bold">•</span>
-                        <span>15-year national overdose evolution mapping (Nature Medicine)</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <span className="text-teal-600 font-bold">•</span>
-                        <span>Identified 27 shifting hotspot regions and racial disparities</span>
-                      </li>
-                    </>
-                  )}
-                  {chapter.theme === "Infectious Diseases" && (
-                    <>
-                      <li className="flex items-start gap-2">
-                        <span className="text-teal-600 font-bold">•</span>
-                        <span>Prison TB transmission networks (Lancet Regional Health)</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <span className="text-teal-600 font-bold">•</span>
-                        <span>Environmental leishmaniasis prediction linked to deforestation</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <span className="text-teal-600 font-bold">•</span>
-                        <span>AI-based zoonotic outbreak forecasting using satellite data</span>
-                      </li>
-                    </>
-                  )}
-                  {chapter.theme === "NCDs & Social" && (
-                    <>
-                      <li className="flex items-start gap-2">
-                        <span className="text-teal-600 font-bold">•</span>
-                        <span>District-level diabetes prevalence mapping across India (JAMA Network Open)</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <span className="text-teal-600 font-bold">•</span>
-                        <span>Food insecurity-mental health geographic nexus in South Africa</span>
-                      </li>
-                    </>
-                  )}
-                  {chapter.theme === "Methods" && (
-                    <>
-                      <li className="flex items-start gap-2">
-                        <span className="text-teal-600 font-bold">•</span>
-                        <span>GeoAI integration roadmap for public health surveillance</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <span className="text-teal-600 font-bold">•</span>
-                        <span>Next-generation frameworks for epidemic intelligence</span>
-                      </li>
-                    </>
-                  )}
-                </ul>
+              <div className="p-3 md:p-6 bg-white/70 dark:bg-slate-800/70 rounded-xl">
+                <div className="flex items-start gap-3 md:gap-4">
+                  <div className="p-2 rounded-full bg-teal-100 dark:bg-teal-800 flex-shrink-0">
+                    <Lightbulb className="h-5 w-5 md:h-6 md:w-6 text-teal-600 dark:text-teal-300" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-slate-900 dark:text-slate-100 mb-2 md:mb-3 text-base md:text-lg">
+                      Key Contributions & Impact:
+                    </h3>
+                    <ul className="space-y-2 text-sm md:text-base text-slate-800 dark:text-slate-200">
+                      {chapter.theme === "HIV/AIDS" && (
+                        <>
+                          <li className="flex items-start gap-2">
+                            <span className="text-teal-600 font-bold">•</span>
+                            <span>Spatial clustering identified to target HIV prevention</span>
+                          </li>
+                          <li className="flex items-start gap-2">
+                            <span className="text-teal-600 font-bold">•</span>
+                            <span>Geospatial evaluation of UNAIDS 95-95-95 targets</span>
+                          </li>
+                        </>
+                      )}
+                      {chapter.theme === "COVID-19" && (
+                        <>
+                          <li className="flex items-start gap-2">
+                            <span className="text-teal-600 font-bold">•</span>
+                            <span>Continental-scale genomic surveillance across Africa (Science journal)</span>
+                          </li>
+                          <li className="flex items-start gap-2">
+                            <span className="text-teal-600 font-bold">•</span>
+                            <span>Urban-rural pandemic dynamics revealing distinct transmission patterns</span>
+                          </li>
+                        </>
+                      )}
+                      {chapter.theme === "Substance Use" && (
+                        <>
+                          <li className="flex items-start gap-2">
+                            <span className="text-teal-600 font-bold">•</span>
+                            <span>15-year national overdose evolution mapping (Nature Medicine)</span>
+                          </li>
+                          <li className="flex items-start gap-2">
+                            <span className="text-teal-600 font-bold">•</span>
+                            <span>Identified 27 shifting hotspot regions and racial disparities</span>
+                          </li>
+                        </>
+                      )}
+                      {chapter.theme === "Infectious Diseases" && (
+                        <>
+                          <li className="flex items-start gap-2">
+                            <span className="text-teal-600 font-bold">•</span>
+                            <span>AI-driven prediction of zoonotic spillover risk in the Amazon</span>
+                          </li>
+                          <li className="flex items-start gap-2">
+                            <span className="text-teal-600 font-bold">•</span>
+                            <span>Geospatial characterization of urban leishmaniasis</span>
+                          </li>
+                        </>
+                      )}
+                      {chapter.theme === "NCDs & Social" && (
+                        <>
+                          <li className="flex items-start gap-2">
+                            <span className="text-teal-600 font-bold">•</span>
+                            <span>Geographic links between food insecurity and mental health</span>
+                          </li>
+                          <li className="flex items-start gap-2">
+                            <span className="text-teal-600 font-bold">•</span>
+                            <span>Mapped healthcare accessibility for NCDs in rural South Africa</span>
+                          </li>
+                        </>
+                      )}
+                      {chapter.theme === "Methods" && (
+                        <>
+                          <li className="flex items-start gap-2">
+                            <span className="text-teal-600 font-bold">•</span>
+                            <span>GeoAI integration roadmap for public health surveillance</span>
+                          </li>
+                          <li className="flex items-start gap-2">
+                            <span className="text-teal-600 font-bold">•</span>
+                            <span>Next-generation frameworks for epidemic intelligence</span>
+                          </li>
+                        </>
+                      )}
+                    </ul>
+                  </div>
+                </div>
               </div>
             </div>
           )}
 
           {chapter.type === "conclusion" && (
             <div className="space-y-4 md:space-y-6">
-              <div className="bg-white/10 dark:bg-slate-900/30 backdrop-blur-sm p-4 rounded-lg border border-white/20">
-                <p className="text-slate-700 dark:text-blue-400 leading-relaxed text-sm md:text-lg">
+              <div className="bg-white/10 dark:bg-black/30 backdrop-blur-md p-4 rounded-lg border border-white/20 m-3 md:m-0">
+                <p className="text-slate-900 dark:text-slate-200 leading-relaxed text-sm md:text-lg">
                     These 20 studies represent more than academic achievement—they represent <strong>lives saved</strong>, 
                     <strong>policies informed</strong>, and <strong>communities protected</strong> through the power of geographic intelligence. 
                   From identifying HIV hotspots that guided billion-dollar prevention programs to tracking 
@@ -1018,46 +1010,41 @@ function ChapterContent({
               </div>
 
               <div className="p-4 md:p-6 bg-white/70 dark:bg-slate-800/70 rounded-xl">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-6 bg-white/70 dark:bg-slate-800/70 rounded-xl">
-                  <div className="space-y-3">
-                    <h4 className="font-bold text-slate-900 dark:text-slate-100">Research Excellence:</h4>
-                                        <div className="space-y-2 text-sm">
-                        <div className="flex justify-between">
-                          <span className="text-slate-600 dark:text-slate-200">Top-tier Journals:</span>
-                          <span className="text-teal-600 dark:text-teal-200 font-semibold">Science, Nature, Lancet</span>
-                        </div>
-                        <div className="flex justify-between">
-                          <span className="text-slate-600 dark:text-slate-200">Geographic Scope:</span>
-                          <span className="text-teal-600 dark:text-teal-200 font-semibold">6 continents, 15+ countries</span>
-                        </div>
-                    </div>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
+                  <div className="space-y-2">
+                    <Users className="h-8 w-8 text-teal-600 dark:text-teal-400 mx-auto" />
+                    <h4 className="font-semibold text-slate-900 dark:text-slate-100">Community Impact</h4>
+                    <p className="text-xs text-slate-600 dark:text-slate-300">
+                      Informing local health departments and community organizations to optimize resource allocation.
+                    </p>
                   </div>
-                  <div className="space-y-3">
-                    <h4 className="font-bold text-slate-900 dark:text-slate-100">Global Impact:</h4>
-                                        <div className="space-y-2 text-sm">
-                        <div className="flex justify-between">
-                          <span className="text-slate-600 dark:text-slate-200">Health Conditions:</span>
-                          <span className="text-teal-600 dark:text-teal-200 font-semibold">HIV, COVID, TB, NCDs</span>
-                        </div>
-                        <div className="flex justify-between">
-                          <span className="text-slate-600 dark:text-slate-200">Future Direction:</span>
-                          <span className="text-teal-600 dark:text-teal-200 font-semibold">AI-driven intelligence</span>
-                        </div>
-                    </div>
+                  <div className="space-y-2">
+                    <Globe className="h-8 w-8 text-teal-600 dark:text-teal-400 mx-auto" />
+                    <h4 className="font-semibold text-slate-900 dark:text-slate-100">Policy Influence</h4>
+                    <p className="text-xs text-slate-600 dark:text-slate-300">
+                      Providing evidence for national and global health policies (UNAIDS, WHO).
+                    </p>
+                  </div>
+                  <div className="space-y-2">
+                    <Lightbulb className="h-8 w-8 text-teal-600 dark:text-teal-400 mx-auto" />
+                    <h4 className="font-semibold text-slate-900 dark:text-slate-100">Future Direction</h4>
+                    <p className="text-xs text-slate-600 dark:text-slate-300">
+                      Pioneering GeoAI methods to build predictive models for future health crises.
+                    </p>
                   </div>
                 </div>
               </div>
 
-              <div className="bg-white/10 dark:bg-slate-900/30 backdrop-blur-sm p-4 rounded-lg border border-white/20">
-                <p className="text-slate-700 dark:text-slate-300 leading-relaxed text-sm md:text-lg text-center">
+              <div className="bg-white/10 dark:bg-black/30 backdrop-blur-md p-4 rounded-lg border border-white/20 m-3 md:m-0">
+                <p className="text-slate-900 dark:text-slate-200 leading-relaxed text-sm md:text-lg text-center">
                   This journey continues. The methods pioneered and lessons learned are now being 
                   applied to new frontiers in global health.
                 </p>
               </div>
             </div>
           )}
-          </CardContent>
-        </div>
-      </motion.div>
-    )
-  } 
+        </CardContent>
+      </div>
+    </motion.div>
+  )
+} 
