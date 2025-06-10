@@ -7,7 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Progress } from "@/components/ui/progress"
 import { Button } from "@/components/ui/button"
-import { ChevronDown, MapPin, BookOpen, Award, Globe, Microscope, Heart, Shield, Calendar, ChevronUp, Pause, Play } from "lucide-react"
+import { ChevronDown, MapPin, BookOpen, Award, Globe, Microscope, Heart, Shield, Calendar, ChevronUp, Pause, Play, Menu } from "lucide-react"
 
 // Import Leaflet CSS
 import "leaflet/dist/leaflet.css"
@@ -208,6 +208,7 @@ export default function StoryMap({ className = "" }: StoryMapProps) {
   const [isAutoScrolling, setIsAutoScrolling] = useState(false)
   const [showScrollHint, setShowScrollHint] = useState(true)
   const [mapLoaded, setMapLoaded] = useState(false)
+  const [showMobileMenu, setShowMobileMenu] = useState(false)
   const scrollContainerRef = useRef<HTMLDivElement>(null)
   
   const totalChapters = storyChapters.length
@@ -225,6 +226,9 @@ export default function StoryMap({ className = "" }: StoryMapProps) {
       top: targetScroll,
       behavior: 'smooth'
     })
+    
+    // Auto-close mobile menu after navigation
+    setShowMobileMenu(false)
     
     setTimeout(() => setIsAutoScrolling(false), 1000)
   }, [totalChapters])
@@ -268,6 +272,21 @@ export default function StoryMap({ className = "" }: StoryMapProps) {
       setShowScrollHint(false)
     }
   }, [scrollProgress])
+
+  // Close mobile menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (showMobileMenu) {
+        const target = event.target as Element
+        if (!target.closest('.mobile-menu-container')) {
+          setShowMobileMenu(false)
+        }
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [showMobileMenu])
 
   // Handle scroll-based progress and chapter detection
   useEffect(() => {
@@ -326,7 +345,7 @@ export default function StoryMap({ className = "" }: StoryMapProps) {
         transition={{ duration: 0.6 }}
       >
         {/* Mobile Compact Header */}
-        <div className="md:hidden">
+        <div className="md:hidden mobile-menu-container">
           <Card className="bg-white/98 dark:bg-slate-800/98 backdrop-blur-sm border-slate-200 dark:border-slate-600 shadow-md">
             <CardContent className="p-2">
               <div className="flex items-center justify-between mb-2">
@@ -354,6 +373,15 @@ export default function StoryMap({ className = "" }: StoryMapProps) {
                     className="h-6 w-6 p-0 text-slate-600 dark:text-slate-300"
                   >
                     <ChevronDown className="h-3 w-3" />
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => setShowMobileMenu(!showMobileMenu)}
+                    className="h-6 w-6 p-0 text-slate-600 dark:text-slate-300 ml-1"
+                    aria-label="Toggle chapter menu"
+                  >
+                    <Menu className="h-3 w-3" />
                   </Button>
                 </div>
               </div>
@@ -388,7 +416,7 @@ export default function StoryMap({ className = "" }: StoryMapProps) {
                   >
                     <ChevronUp className="h-4 w-4" />
                   </Button>
-                  <span className="text-sm text-slate-700 dark:text-slate-200 font-mono min-w-[3rem] text-center">
+                  <span className="text-sm text-slate-700 dark:text-slate-100 font-mono min-w-[3rem] text-center">
                     {activeChapter + 1} / {totalChapters}
                   </span>
                   <Button
@@ -414,7 +442,7 @@ export default function StoryMap({ className = "" }: StoryMapProps) {
                     </Badge>
                   )}
                 </div>
-                <p className="text-sm text-slate-700 dark:text-slate-200 truncate max-w-md">
+                <p className="text-sm text-slate-700 dark:text-slate-100 truncate max-w-md">
                   {currentChapter.title}
                 </p>
               </div>
@@ -422,6 +450,56 @@ export default function StoryMap({ className = "" }: StoryMapProps) {
           </Card>
         </div>
       </motion.div>
+
+      {/* Mobile Chapter Menu Dropdown */}
+      <AnimatePresence>
+        {showMobileMenu && (
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            className="absolute top-16 left-1 right-1 z-40 md:hidden mobile-menu-container"
+          >
+            <Card className="bg-white/98 dark:bg-slate-800/98 backdrop-blur-sm border-slate-200 dark:border-slate-600 shadow-lg">
+              <CardContent className="p-3">
+                <h3 className="font-semibold text-slate-900 dark:text-slate-100 text-sm mb-3 text-center">
+                  Quick Navigation
+                </h3>
+                <div className="grid grid-cols-2 gap-2">
+                  {storyChapters.map((chapter, index) => (
+                    <Button
+                      key={chapter.id}
+                      variant={activeChapter === index ? "default" : "ghost"}
+                      size="sm"
+                      onClick={() => navigateToChapter(index)}
+                      className={`justify-start text-xs h-8 px-2 ${
+                        activeChapter === index ? 'bg-teal-600 hover:bg-teal-700 text-white' : 'text-slate-700 dark:text-slate-200'
+                      }`}
+                    >
+                      <chapter.icon className="h-3 w-3 mr-2 flex-shrink-0" />
+                      <span className="truncate">{
+                        chapter.type === "intro" ? "Intro" :
+                        chapter.type === "conclusion" ? "Conclusion" :
+                        chapter.theme
+                      }</span>
+                    </Button>
+                  ))}
+                </div>
+                <div className="mt-3 pt-2 border-t border-slate-200 dark:border-slate-600">
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => setShowMobileMenu(false)}
+                    className="w-full text-xs text-slate-600 dark:text-slate-300"
+                  >
+                    Close Menu
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Enhanced Scroll Instruction & Controls */}
       <AnimatePresence>
@@ -690,7 +768,7 @@ function ChapterContent({
                     <h3 className="font-bold text-slate-900 dark:text-slate-100 mb-2">
                       📍 How to Explore
                     </h3>
-                    <p className="text-sm text-slate-700 dark:text-slate-200 mb-3">
+                    <p className="text-sm text-slate-700 dark:text-slate-100 mb-3">
                       <strong>Scroll down</strong> through 8 chapters • 20 studies
                     </p>
                     <div className="flex flex-wrap justify-center gap-2 text-xs">
@@ -701,7 +779,7 @@ function ChapterContent({
                         Map markers
                       </span>
                     </div>
-                    <p className="text-teal-600 dark:text-teal-300 font-semibold mt-3 text-sm">
+                    <p className="text-teal-600 dark:text-teal-200 font-semibold mt-3 text-sm">
                       Start scrolling! ⬇️
                     </p>
                   </CardContent>
@@ -720,19 +798,19 @@ function ChapterContent({
                         <h3 className="font-semibold text-slate-900 dark:text-slate-100 mb-2">
                           📍 How to Explore This StoryMap
                         </h3>
-                        <div className="space-y-2 text-base text-slate-700 dark:text-slate-200">
+                                                  <div className="space-y-2 text-base text-slate-700 dark:text-slate-100">
                           <p>
                             <strong>Scroll down</strong> to journey through 8 thematic chapters covering 20 groundbreaking studies
                           </p>
-                          <div className="grid grid-cols-2 gap-2 text-sm text-slate-600 dark:text-slate-300">
+                                                      <div className="grid grid-cols-2 gap-2 text-sm text-slate-600 dark:text-slate-200">
                             <div>• 🖱️ <strong>Mouse wheel</strong> or touch scroll</div>
                             <div>• ⌨️ <strong>Arrow keys</strong> for navigation</div>
                             <div>• 🗺️ <strong>Map markers</strong> show study locations</div>
                             <div>• 📊 <strong>Progress bar</strong> tracks your journey</div>
                           </div>
-                          <p className="text-teal-600 dark:text-teal-300 font-medium mt-3">
-                            Ready to explore? Start scrolling! ⬇️
-                          </p>
+                                                     <p className="text-teal-600 dark:text-teal-200 font-medium mt-3">
+                             Ready to explore? Start scrolling! ⬇️
+                           </p>
                         </div>
                       </div>
                     </div>
@@ -795,19 +873,19 @@ function ChapterContent({
                     <span className="font-bold text-teal-700 dark:text-teal-200 text-base md:text-lg">
                       {chapter.studyCount} Studies
                     </span>
-                    <span className="text-xs md:text-sm text-slate-600 dark:text-slate-300">
-                      in {chapter.regions}
-                    </span>
-                  </div>
-                  {chapter.keyInsight && (
-                    <p className="text-xs md:text-sm text-slate-600 dark:text-slate-300 italic">
-                      Key: {chapter.keyInsight}
-                    </p>
-                  )}
+                                          <span className="text-xs md:text-sm text-slate-600 dark:text-slate-200">
+                        in {chapter.regions}
+                      </span>
+                    </div>
+                    {chapter.keyInsight && (
+                      <p className="text-xs md:text-sm text-slate-600 dark:text-slate-200 italic">
+                        Key: {chapter.keyInsight}
+                      </p>
+                    )}
                 </div>
               </div>
               
-              <p className="text-slate-700 dark:text-slate-200 leading-relaxed text-sm md:text-lg">
+                              <p className="text-slate-700 dark:text-slate-100 leading-relaxed text-sm md:text-lg">
                 {chapter.theme === "HIV/AIDS" && 
                   "The foundational body of work that established spatial epidemiology as essential for HIV prevention and control. From identifying transmission hotspots to evaluating the UNAIDS 95-95-95 targets, these studies have guided billions in prevention investments across sub-Saharan Africa, revealing the critical importance of geographic targeting in epidemic response."
                 }
@@ -833,7 +911,7 @@ function ChapterContent({
                   <Microscope className="h-5 w-5 text-teal-600 dark:text-teal-300" />
                   Key Contributions & Impact:
                 </h4>
-                <ul className="space-y-2 text-slate-700 dark:text-slate-200">
+                                  <ul className="space-y-2 text-slate-700 dark:text-slate-100">
                   {chapter.theme === "HIV/AIDS" && (
                     <>
                       <li className="flex items-start gap-2">
@@ -925,9 +1003,9 @@ function ChapterContent({
 
           {chapter.type === "conclusion" && (
             <div className="space-y-4 md:space-y-6">
-              <p className="text-slate-700 dark:text-slate-200 leading-relaxed text-sm md:text-lg">
-                These 20 studies represent more than academic achievement—they represent <strong>lives saved</strong>, 
-                <strong>policies informed</strong>, and <strong>communities protected</strong> through the power of geographic intelligence. 
+                              <p className="text-slate-700 dark:text-slate-100 leading-relaxed text-sm md:text-lg">
+                  These 20 studies represent more than academic achievement—they represent <strong>lives saved</strong>, 
+                  <strong>policies informed</strong>, and <strong>communities protected</strong> through the power of geographic intelligence. 
                 From identifying HIV hotspots that guided billion-dollar prevention programs to tracking 
                 COVID-19 variants across continents, spatial epidemiology has proven essential for 
                 addressing the world's most pressing health challenges.
@@ -936,34 +1014,34 @@ function ChapterContent({
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-6 bg-white/70 dark:bg-slate-800/70 rounded-xl">
                 <div className="space-y-3">
                   <h4 className="font-bold text-slate-900 dark:text-slate-100">Research Excellence:</h4>
-                  <div className="space-y-2 text-sm">
-                    <div className="flex justify-between">
-                      <span className="text-slate-600 dark:text-slate-300">Top-tier Journals:</span>
-                      <span className="text-teal-600 dark:text-teal-300 font-semibold">Science, Nature, Lancet</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-slate-600 dark:text-slate-300">Geographic Scope:</span>
-                      <span className="text-teal-600 dark:text-teal-300 font-semibold">6 continents, 15+ countries</span>
-                    </div>
+                                      <div className="space-y-2 text-sm">
+                      <div className="flex justify-between">
+                        <span className="text-slate-600 dark:text-slate-200">Top-tier Journals:</span>
+                        <span className="text-teal-600 dark:text-teal-200 font-semibold">Science, Nature, Lancet</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-slate-600 dark:text-slate-200">Geographic Scope:</span>
+                        <span className="text-teal-600 dark:text-teal-200 font-semibold">6 continents, 15+ countries</span>
+                      </div>
                   </div>
                 </div>
                 <div className="space-y-3">
                   <h4 className="font-bold text-slate-900 dark:text-slate-100">Global Impact:</h4>
-                  <div className="space-y-2 text-sm">
-                    <div className="flex justify-between">
-                      <span className="text-slate-600 dark:text-slate-300">Health Conditions:</span>
-                      <span className="text-teal-600 dark:text-teal-300 font-semibold">HIV, COVID, TB, NCDs</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-slate-600 dark:text-slate-300">Future Direction:</span>
-                      <span className="text-teal-600 dark:text-teal-300 font-semibold">AI-driven intelligence</span>
-                    </div>
+                                      <div className="space-y-2 text-sm">
+                      <div className="flex justify-between">
+                        <span className="text-slate-600 dark:text-slate-200">Health Conditions:</span>
+                        <span className="text-teal-600 dark:text-teal-200 font-semibold">HIV, COVID, TB, NCDs</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-slate-600 dark:text-slate-200">Future Direction:</span>
+                        <span className="text-teal-600 dark:text-teal-200 font-semibold">AI-driven intelligence</span>
+                      </div>
                   </div>
                 </div>
               </div>
 
               <div className="p-5 bg-gradient-to-r from-teal-50 to-blue-50 dark:from-teal-900/20 dark:to-blue-900/20 rounded-xl">
-                <blockquote className="text-slate-700 dark:text-slate-200 text-center text-lg italic font-medium">
+                <blockquote className="text-slate-700 dark:text-slate-100 text-center text-lg italic font-medium">
                   "The future of global health lies in understanding not just what diseases affect us, 
                   but where they affect us—and why geography matters for every intervention we design."
                 </blockquote>
