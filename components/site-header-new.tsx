@@ -67,6 +67,8 @@ const navLinks: NavLink[] = [
 ];
 
 export default function SiteHeaderNew() {
+  const [open, setOpen] = React.useState(false)
+
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 max-w-screen-2xl items-center justify-between">
@@ -109,7 +111,7 @@ export default function SiteHeaderNew() {
         <div className="flex items-center space-x-2">
           <SiteSearch />
           <ModeToggle />
-          <Sheet>
+          <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger asChild className="lg:hidden">
               <Button variant="ghost" size="icon">
                 <Menu className="h-6 w-6" />
@@ -126,6 +128,7 @@ export default function SiteHeaderNew() {
                     <Link
                       key={link.label}
                       href={link.href}
+                      onClick={() => setOpen(false)}
                       className="font-sans text-base font-medium text-foreground hover:text-teal-500 dark:hover:text-vibrant-gold-400 flex items-center p-3 rounded-lg hover:bg-muted/50 transition-all duration-200 animate-slide-in-right"
                       style={{ animationDelay: `${index * 0.1}s` }}
                     >

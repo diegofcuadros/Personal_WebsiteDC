@@ -521,10 +521,10 @@ export default function StoryMap({ className = "" }: StoryMapProps) {
                     <ChevronDown className="h-6 w-6 text-teal-600" />
                   </motion.div>
                                      <div>
-                     <p className="text-sm font-bold text-slate-900 dark:text-white mb-1">
+                     <p className="text-sm font-bold text-slate-900 dark:text-slate-100 mb-1">
                        🚀 Scroll Down to Begin Your Journey
                      </p>
-                     <p className="text-xs text-slate-600 dark:text-slate-300 mb-2">
+                     <p className="text-xs text-slate-600 dark:text-slate-200 mb-2">
                        Explore {totalChapters} chapters • 20 studies • 6 research themes
                      </p>
                      <div className="flex flex-wrap gap-2 text-xs">
@@ -768,7 +768,7 @@ function ChapterContent({
                     <h3 className="font-bold text-slate-900 dark:text-slate-100 mb-2">
                       📍 How to Explore
                     </h3>
-                    <p className="text-sm text-slate-700 dark:text-slate-100 mb-3">
+                                            <p className="text-sm text-slate-700 dark:text-slate-100 mb-3">
                       <strong>Scroll down</strong> through 8 chapters • 20 studies
                     </p>
                     <div className="flex flex-wrap justify-center gap-2 text-xs">
@@ -818,7 +818,7 @@ function ChapterContent({
                 </Card>
               </div>
 
-              <p className="text-slate-700 dark:text-slate-200 leading-relaxed text-sm md:text-lg">
+              <p className="text-slate-700 dark:text-slate-100 leading-relaxed text-sm md:text-lg">
                 From HIV hotspots in sub-Saharan Africa to opioid epidemics in rural America, 
                 spatial epidemiology reveals the hidden geographic patterns that drive health outcomes. 
                 This is the story of <strong>20 groundbreaking studies</strong> that have shaped our understanding 
@@ -829,24 +829,24 @@ function ChapterContent({
               <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-6 p-3 md:p-6 bg-white/70 dark:bg-slate-800/70 rounded-xl">
                 <div className="text-center">
                   <div className="text-xl md:text-3xl font-bold text-teal-600 dark:text-teal-400">15+</div>
-                  <div className="text-xs md:text-sm text-slate-600 dark:text-slate-300 font-medium">Countries</div>
+                  <div className="text-xs md:text-sm text-slate-600 dark:text-slate-200 font-medium">Countries</div>
                 </div>
                 <div className="text-center">
                   <div className="text-xl md:text-3xl font-bold text-teal-600 dark:text-teal-400">2011-25</div>
-                  <div className="text-xs md:text-sm text-slate-600 dark:text-slate-300 font-medium">Period</div>
+                  <div className="text-xs md:text-sm text-slate-600 dark:text-slate-200 font-medium">Period</div>
                 </div>
                 <div className="text-center">
                   <div className="text-xl md:text-3xl font-bold text-teal-600 dark:text-teal-400">6</div>
-                  <div className="text-xs md:text-sm text-slate-600 dark:text-slate-300 font-medium">Themes</div>
+                  <div className="text-xs md:text-sm text-slate-600 dark:text-slate-200 font-medium">Themes</div>
                 </div>
                 <div className="text-center">
                   <div className="text-xl md:text-3xl font-bold text-teal-600 dark:text-teal-400">20</div>
-                  <div className="text-xs md:text-sm text-slate-600 dark:text-slate-300 font-medium">Studies</div>
+                  <div className="text-xs md:text-sm text-slate-600 dark:text-slate-200 font-medium">Studies</div>
                 </div>
               </div>
 
               <div className="p-4 bg-gradient-to-r from-teal-50 to-blue-50 dark:from-teal-900/20 dark:to-blue-900/20 rounded-lg">
-                <p className="text-slate-700 dark:text-slate-300 text-center italic mb-3">
+                <p className="text-slate-700 dark:text-slate-200 text-center italic mb-3">
                   "Geographic intelligence transforms health data into actionable insights, 
                   revealing where interventions are needed most."
                 </p>
