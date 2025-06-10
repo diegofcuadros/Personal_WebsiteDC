@@ -320,67 +320,68 @@ export default function StoryMap({ className = "" }: StoryMapProps) {
     >
       {/* Progress Bar Header */}
       <motion.div 
-        className="absolute top-4 left-4 right-4 z-30"
+        className="absolute top-2 left-2 right-2 md:top-4 md:left-4 md:right-4 z-30"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
       >
         <Card className={`bg-white/95 dark:bg-slate-900/95 backdrop-blur-sm border-slate-200 dark:border-slate-700 shadow-lg ${currentChapter.color}`}>
-          <CardContent className="p-4">
-            <div className="flex items-center justify-between mb-3">
-              <div className="flex items-center gap-3">
-                <currentChapter.icon className="h-6 w-6 text-slate-700 dark:text-slate-300" />
-                <h2 className="font-sans font-bold text-lg text-slate-900 dark:text-slate-100">
-                  Global Health Through Geographic Intelligence
-                </h2>
-              </div>
-              <div className="flex items-center gap-2">
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => navigateToChapter(Math.max(0, activeChapter - 1))}
-                  disabled={activeChapter === 0}
-                  className="h-8 w-8 p-0"
-                  aria-label="Previous chapter"
-                >
-                  <ChevronUp className="h-4 w-4" />
-                </Button>
-                <span className="text-sm text-slate-600 dark:text-slate-400 font-mono min-w-[3rem] text-center">
-                  {activeChapter + 1} / {totalChapters}
-                </span>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => navigateToChapter(Math.min(totalChapters - 1, activeChapter + 1))}
-                  disabled={activeChapter === totalChapters - 1}
-                  className="h-8 w-8 p-0"
-                  aria-label="Next chapter"
-                >
-                  <ChevronDown className="h-4 w-4" />
-                </Button>
-              </div>
+          <CardContent className="p-2 md:p-4">
+                          <div className="flex items-center justify-between mb-2 md:mb-3">
+                <div className="flex items-center gap-2 md:gap-3">
+                  <currentChapter.icon className="h-5 w-5 md:h-6 md:w-6 text-teal-600 dark:text-teal-400" />
+                  <h2 className="font-sans font-bold text-sm md:text-lg text-slate-900 dark:text-white">
+                    <span className="hidden md:inline">Global Health Through Geographic Intelligence</span>
+                    <span className="md:hidden">Research StoryMap</span>
+                  </h2>
+                </div>
+                              <div className="flex items-center gap-1 md:gap-2">
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => navigateToChapter(Math.max(0, activeChapter - 1))}
+                    disabled={activeChapter === 0}
+                    className="h-7 w-7 md:h-8 md:w-8 p-0"
+                    aria-label="Previous chapter"
+                  >
+                    <ChevronUp className="h-3 w-3 md:h-4 md:w-4" />
+                  </Button>
+                  <span className="text-xs md:text-sm text-slate-700 dark:text-slate-200 font-mono min-w-[2.5rem] md:min-w-[3rem] text-center">
+                    {activeChapter + 1}/{totalChapters}
+                  </span>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => navigateToChapter(Math.min(totalChapters - 1, activeChapter + 1))}
+                    disabled={activeChapter === totalChapters - 1}
+                    className="h-7 w-7 md:h-8 md:w-8 p-0"
+                    aria-label="Next chapter"
+                  >
+                    <ChevronDown className="h-3 w-3 md:h-4 md:w-4" />
+                  </Button>
+                </div>
             </div>
             
             <Progress 
               value={scrollProgress} 
-              className="h-3 mb-3" 
+              className="h-2 md:h-3 mb-2 md:mb-3" 
             />
             
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <Badge variant="secondary" className="text-xs font-medium">
-                  {currentChapter.theme}
-                </Badge>
-                {currentChapter.studyCount && (
-                  <Badge variant="outline" className="text-xs">
-                    {currentChapter.studyCount} Studies
+                          <div className="flex items-center justify-between">
+                <div className="flex items-center gap-1 md:gap-2">
+                  <Badge variant="secondary" className="text-xs font-medium px-2 py-1">
+                    {currentChapter.theme}
                   </Badge>
-                )}
+                  {currentChapter.studyCount && (
+                    <Badge variant="outline" className="text-xs px-2 py-1 hidden sm:inline-flex">
+                      {currentChapter.studyCount} Studies
+                    </Badge>
+                  )}
+                </div>
+                <p className="text-xs md:text-sm text-slate-700 dark:text-slate-200 truncate max-w-[8rem] md:max-w-md">
+                  {currentChapter.title}
+                </p>
               </div>
-              <p className="text-sm text-slate-600 dark:text-slate-400 truncate max-w-md">
-                {currentChapter.title}
-              </p>
-            </div>
           </CardContent>
         </Card>
       </motion.div>
@@ -404,14 +405,25 @@ export default function StoryMap({ className = "" }: StoryMapProps) {
                   >
                     <ChevronDown className="h-6 w-6 text-teal-600" />
                   </motion.div>
-                  <div>
-                    <p className="text-sm font-semibold text-slate-700 dark:text-slate-300 mb-1">
-                      Scroll to explore the journey
-                    </p>
-                    <p className="text-xs text-slate-500 dark:text-slate-400">
-                      Use ↑↓ keys or mouse wheel • {totalChapters} chapters
-                    </p>
-                  </div>
+                                     <div>
+                     <p className="text-sm font-bold text-slate-900 dark:text-white mb-1">
+                       🚀 Scroll Down to Begin Your Journey
+                     </p>
+                     <p className="text-xs text-slate-600 dark:text-slate-300 mb-2">
+                       Explore {totalChapters} chapters • 20 studies • 6 research themes
+                     </p>
+                     <div className="flex flex-wrap gap-2 text-xs">
+                       <span className="px-2 py-1 bg-teal-100 dark:bg-teal-800 rounded text-teal-700 dark:text-teal-300">
+                         Mouse wheel
+                       </span>
+                       <span className="px-2 py-1 bg-teal-100 dark:bg-teal-800 rounded text-teal-700 dark:text-teal-300">
+                         Arrow keys
+                       </span>
+                       <span className="px-2 py-1 bg-teal-100 dark:bg-teal-800 rounded text-teal-700 dark:text-teal-300">
+                         Touch scroll
+                       </span>
+                     </div>
+                   </div>
                 </div>
               </CardContent>
             </Card>
@@ -419,11 +431,11 @@ export default function StoryMap({ className = "" }: StoryMapProps) {
         )}
       </AnimatePresence>
 
-      {/* Floating Navigation Aid */}
+      {/* Floating Navigation Aid - Hidden on Mobile */}
       <motion.div
         initial={{ opacity: 0, x: 20 }}
         animate={{ opacity: activeChapter > 0 ? 1 : 0, x: activeChapter > 0 ? 0 : 20 }}
-        className="absolute right-6 top-1/2 transform -translate-y-1/2 z-20"
+        className="absolute right-6 top-1/2 transform -translate-y-1/2 z-20 hidden lg:block"
       >
         <Card className="bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm border border-slate-200 dark:border-slate-700 shadow-lg">
           <CardContent className="p-2">
@@ -531,7 +543,7 @@ export default function StoryMap({ className = "" }: StoryMapProps) {
           {storyChapters.map((chapter, index) => (
             <div
               key={chapter.id}
-              className="h-screen flex items-center justify-start pl-6 pr-6 md:pl-16 md:pr-16"
+              className="h-screen flex items-center justify-start px-3 py-4 md:px-16 md:py-8"
             >
               <ChapterContent 
                 chapter={chapter} 
@@ -569,39 +581,69 @@ function ChapterContent({
         scale: isActive ? 1 : 0.96
       }}
       transition={{ duration: 0.8, ease: "easeOut" }}
-      className="max-w-4xl"
+      className="max-w-4xl w-full"
     >
       <Card className={`bg-white/95 dark:bg-slate-900/95 backdrop-blur-lg shadow-2xl ${chapter.color}`}>
-        <CardHeader className="pb-4">
-          <div className="flex items-center gap-4 mb-4">
-            <div className="p-3 rounded-full bg-white dark:bg-slate-800 shadow-md">
-              <IconComponent className="h-8 w-8 text-teal-600 dark:text-teal-400" />
+        <CardHeader className="pb-2 md:pb-4">
+          <div className="flex items-center gap-2 md:gap-4 mb-2 md:mb-4">
+            <div className="p-2 md:p-3 rounded-full bg-white dark:bg-slate-800 shadow-md">
+              <IconComponent className="h-6 w-6 md:h-8 md:w-8 text-teal-600 dark:text-teal-400" />
             </div>
             
-            <div className="flex items-center gap-3">
-              <Badge variant="secondary" className="text-xs font-medium px-3 py-1">
+            <div className="flex flex-col md:flex-row md:items-center gap-1 md:gap-3">
+              <Badge variant="secondary" className="text-xs font-medium px-2 md:px-3 py-1 w-fit">
                 {chapter.type === "intro" ? "Introduction" : 
                  chapter.type === "conclusion" ? "Conclusion" : 
                  `Research Theme`}
               </Badge>
-              <span className="text-xs text-slate-500 dark:text-slate-400 font-mono">
+              <span className="text-xs text-slate-600 dark:text-slate-300 font-mono">
                 Chapter {chapterIndex} of {totalChapters}
               </span>
             </div>
           </div>
 
-          <CardTitle className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-slate-100 mb-3 leading-tight">
+          <CardTitle className="text-xl md:text-3xl lg:text-4xl font-bold text-slate-900 dark:text-white mb-2 md:mb-3 leading-tight">
             {chapter.title}
           </CardTitle>
-          <p className="text-xl text-slate-600 dark:text-slate-400 font-medium leading-relaxed">
+          <p className="text-base md:text-xl text-slate-600 dark:text-slate-300 font-medium leading-relaxed">
             {chapter.subtitle}
           </p>
         </CardHeader>
         
-        <CardContent className="space-y-6">
+        <CardContent className="space-y-4 md:space-y-6">
           {chapter.type === "intro" && (
-            <div className="space-y-6">
-              <p className="text-slate-700 dark:text-slate-300 leading-relaxed text-lg">
+            <div className="space-y-4 md:space-y-6">
+              {/* Instructions Card */}
+              <Card className="bg-gradient-to-r from-teal-50 to-blue-50 dark:from-teal-900/30 dark:to-blue-900/30 border-teal-200 dark:border-teal-700">
+                <CardContent className="p-4 md:p-6">
+                  <div className="flex items-start gap-3">
+                    <div className="p-2 rounded-full bg-teal-100 dark:bg-teal-800">
+                      <ChevronDown className="h-5 w-5 text-teal-600 dark:text-teal-400" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-slate-900 dark:text-white mb-2">
+                        📍 How to Explore This StoryMap
+                      </h3>
+                      <div className="space-y-2 text-sm md:text-base text-slate-700 dark:text-slate-200">
+                        <p>
+                          <strong>Scroll down</strong> to journey through 8 thematic chapters covering 20 groundbreaking studies
+                        </p>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs md:text-sm text-slate-600 dark:text-slate-300">
+                          <div>• 🖱️ <strong>Mouse wheel</strong> or touch scroll</div>
+                          <div>• ⌨️ <strong>Arrow keys</strong> for navigation</div>
+                          <div>• 🗺️ <strong>Map markers</strong> show study locations</div>
+                          <div>• 📊 <strong>Progress bar</strong> tracks your journey</div>
+                        </div>
+                        <p className="text-teal-600 dark:text-teal-400 font-medium mt-3">
+                          Ready to explore? Start scrolling! ⬇️
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <p className="text-slate-700 dark:text-slate-200 leading-relaxed text-sm md:text-lg">
                 From HIV hotspots in sub-Saharan Africa to opioid epidemics in rural America, 
                 spatial epidemiology reveals the hidden geographic patterns that drive health outcomes. 
                 This is the story of <strong>20 groundbreaking studies</strong> that have shaped our understanding 
@@ -609,56 +651,66 @@ function ChapterContent({
                 geographic intelligence.
               </p>
               
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-6 p-6 bg-white/70 dark:bg-slate-800/70 rounded-xl">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-6 p-3 md:p-6 bg-white/70 dark:bg-slate-800/70 rounded-xl">
                 <div className="text-center">
-                  <div className="text-3xl font-bold text-teal-600 dark:text-teal-400">15+</div>
-                  <div className="text-sm text-slate-600 dark:text-slate-400 font-medium">Countries Studied</div>
+                  <div className="text-xl md:text-3xl font-bold text-teal-600 dark:text-teal-400">15+</div>
+                  <div className="text-xs md:text-sm text-slate-600 dark:text-slate-300 font-medium">Countries</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-3xl font-bold text-teal-600 dark:text-teal-400">2011-2025</div>
-                  <div className="text-sm text-slate-600 dark:text-slate-400 font-medium">Research Period</div>
+                  <div className="text-xl md:text-3xl font-bold text-teal-600 dark:text-teal-400">2011-25</div>
+                  <div className="text-xs md:text-sm text-slate-600 dark:text-slate-300 font-medium">Period</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-3xl font-bold text-teal-600 dark:text-teal-400">6</div>
-                  <div className="text-sm text-slate-600 dark:text-slate-400 font-medium">Research Themes</div>
+                  <div className="text-xl md:text-3xl font-bold text-teal-600 dark:text-teal-400">6</div>
+                  <div className="text-xs md:text-sm text-slate-600 dark:text-slate-300 font-medium">Themes</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-3xl font-bold text-teal-600 dark:text-teal-400">20</div>
-                  <div className="text-sm text-slate-600 dark:text-slate-400 font-medium">Publications</div>
+                  <div className="text-xl md:text-3xl font-bold text-teal-600 dark:text-teal-400">20</div>
+                  <div className="text-xs md:text-sm text-slate-600 dark:text-slate-300 font-medium">Studies</div>
                 </div>
               </div>
 
               <div className="p-4 bg-gradient-to-r from-teal-50 to-blue-50 dark:from-teal-900/20 dark:to-blue-900/20 rounded-lg">
-                <p className="text-slate-700 dark:text-slate-300 text-center italic">
+                <p className="text-slate-700 dark:text-slate-300 text-center italic mb-3">
                   "Geographic intelligence transforms health data into actionable insights, 
                   revealing where interventions are needed most."
                 </p>
+                <div className="text-center">
+                  <motion.div
+                    animate={{ y: [0, 5, 0] }}
+                    transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                    className="inline-flex items-center gap-2 text-teal-600 dark:text-teal-400 font-medium text-sm"
+                  >
+                    <span>Continue scrolling to explore each theme</span>
+                    <ChevronDown className="h-4 w-4" />
+                  </motion.div>
+                </div>
               </div>
             </div>
           )}
 
           {chapter.type === "theme" && (
-            <div className="space-y-6">
-              <div className="flex items-center gap-4 p-4 bg-white/70 dark:bg-slate-800/70 rounded-xl">
-                <MapPin className="h-6 w-6 text-teal-600 flex-shrink-0" />
+            <div className="space-y-4 md:space-y-6">
+              <div className="flex items-center gap-3 md:gap-4 p-3 md:p-4 bg-white/70 dark:bg-slate-800/70 rounded-xl">
+                <MapPin className="h-5 w-5 md:h-6 md:w-6 text-teal-600 flex-shrink-0" />
                 <div className="flex-grow">
-                  <div className="flex items-center gap-3 mb-1">
-                    <span className="font-bold text-teal-700 dark:text-teal-300 text-lg">
-                      {chapter.studyCount} Research Studies
+                  <div className="flex flex-col md:flex-row md:items-center gap-1 md:gap-3 mb-1">
+                    <span className="font-bold text-teal-700 dark:text-teal-300 text-base md:text-lg">
+                      {chapter.studyCount} Studies
                     </span>
-                    <span className="text-sm text-slate-600 dark:text-slate-400">
+                    <span className="text-xs md:text-sm text-slate-600 dark:text-slate-300">
                       in {chapter.regions}
                     </span>
                   </div>
                   {chapter.keyInsight && (
-                    <p className="text-sm text-slate-600 dark:text-slate-400 italic">
-                      Key insight: {chapter.keyInsight}
+                    <p className="text-xs md:text-sm text-slate-600 dark:text-slate-300 italic">
+                      Key: {chapter.keyInsight}
                     </p>
                   )}
                 </div>
-              </div>
+                              </div>
               
-              <p className="text-slate-700 dark:text-slate-300 leading-relaxed text-lg">
+              <p className="text-slate-700 dark:text-slate-200 leading-relaxed text-sm md:text-lg">
                 {chapter.theme === "HIV/AIDS" && 
                   "The foundational body of work that established spatial epidemiology as essential for HIV prevention and control. From identifying transmission hotspots to evaluating the UNAIDS 95-95-95 targets, these studies have guided billions in prevention investments across sub-Saharan Africa, revealing the critical importance of geographic targeting in epidemic response."
                 }
@@ -775,8 +827,8 @@ function ChapterContent({
           )}
 
           {chapter.type === "conclusion" && (
-            <div className="space-y-6">
-              <p className="text-slate-700 dark:text-slate-300 leading-relaxed text-lg">
+            <div className="space-y-4 md:space-y-6">
+              <p className="text-slate-700 dark:text-slate-200 leading-relaxed text-sm md:text-lg">
                 These 20 studies represent more than academic achievement—they represent <strong>lives saved</strong>, 
                 <strong>policies informed</strong>, and <strong>communities protected</strong> through the power of geographic intelligence. 
                 From identifying HIV hotspots that guided billion-dollar prevention programs to tracking 
