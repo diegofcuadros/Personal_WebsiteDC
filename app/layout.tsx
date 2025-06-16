@@ -36,7 +36,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning className={`${inter.variable} ${merriweather.variable}`}>
       <body className={cn("min-h-screen font-sans antialiased")}>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
           <div className="relative flex min-h-dvh flex-col bg-background">
             <SiteHeaderNew />
             <main className="flex-1">{children}</main>
