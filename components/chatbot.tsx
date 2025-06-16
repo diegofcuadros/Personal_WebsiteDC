@@ -229,7 +229,20 @@ export default function Chatbot({ className }: ChatbotProps) {
       <motion.div
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
+        className="flex items-center gap-3"
       >
+        {!isOpen && (
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: 20 }}
+            className="bg-white/95 dark:bg-slate-800/95 backdrop-blur-sm px-3 py-2 rounded-full shadow-lg border border-slate-200 dark:border-slate-600"
+          >
+            <span className="text-sm font-medium text-slate-700 dark:text-slate-300 whitespace-nowrap">
+              Ask about me
+            </span>
+          </motion.div>
+        )}
         <Button
           onClick={toggleChatbot}
           className={cn(
