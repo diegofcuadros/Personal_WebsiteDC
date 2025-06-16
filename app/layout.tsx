@@ -5,6 +5,7 @@ import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import SiteHeaderNew from "@/components/site-header-new"
 import SiteFooter from "@/components/site-footer"
+import Chatbot from "@/components/chatbot"
 import { cn } from "@/lib/utils"
 
 const inter = Inter({
@@ -40,6 +41,7 @@ export default function RootLayout({
             <SiteHeaderNew />
             <main className="flex-1">{children}</main>
             <SiteFooter />
+            <Chatbot />
           </div>
         </ThemeProvider>
       </body>

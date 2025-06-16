@@ -113,9 +113,9 @@ export default function SiteHeaderNew() {
           <ModeToggle />
           <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger asChild className="lg:hidden">
-              <Button variant="ghost" size="icon">
-                <Menu className="h-6 w-6" />
-                <span className="sr-only">Toggle Menu</span>
+              <Button variant="ghost" className="flex items-center gap-1 px-3">
+                <Menu className="h-5 w-5" />
+                <span className="text-sm font-medium">Menu</span>
               </Button>
             </SheetTrigger>
             <SheetContent side="right" className="w-[300px] sm:w-[400px] bg-background/95 backdrop-blur-md">
