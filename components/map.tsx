@@ -32,7 +32,7 @@ const locations: { position: LatLngExpression; title: string; description: strin
   {
     position: [39.1031, -84.512],
     title: "Opioid Crisis Analytics in Cincinnati, USA",
-    description: "Using GeoAI to understand and predict opioid overdose hotspots in urban environments.",
+    description: "Using AI-supported analysis and spatial epidemiology to understand and respond to opioid overdose hotspots in urban environments.",
     link: "/research/themes#geoai",
   },
   {

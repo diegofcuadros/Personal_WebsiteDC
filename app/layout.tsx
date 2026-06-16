@@ -23,9 +23,9 @@ const merriweather = Merriweather({
 })
 
 export const metadata: Metadata = {
-  title: "Dr. Diego F. Cuadros | Digital Epidemiology Laboratory",
-  description: "Advancing Health Through Innovative Data Analytics. Geo-AI Insights for Better Public Health.",
-    generator: 'v0.dev'
+  title: "Dr. Diego F. Cuadros | AI-Human Interaction & Digital Epidemiology",
+  description: "Professor of Epidemiology advancing AI-human interaction, agentic AI systems, digital epidemiology, disease modeling, and spatial decision science.",
+  generator: "Personal Website Portfolio",
 }
 
 export default function RootLayout({

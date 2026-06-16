@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import * as React from "react"
 import {
@@ -9,183 +9,49 @@ import {
   CommandItem,
   CommandList,
 } from "@/components/ui/command"
-import { BookOpen, Link as LinkIcon, Search } from "lucide-react"
+import { BookOpen, Search } from "lucide-react"
 import { useRouter } from "next/navigation"
+import { allPublications } from "@/data/publications"
 
-// Real publications data for Dr. Diego F. Cuadros organized by research categories
-const publications = [
-  // 1. HIV Hotspots
+const quickLinks = [
   {
-    title: "Mapping HIV clustering: a strategy for identifying populations at high risk of HIV infection in sub-Saharan Africa",
-    authors: "Cuadros D.F., Awad S.F., Abu-Raddad L.J.",
-    journal: "International Journal of Health Geographics",
-    year: 2013,
-    tags: ["HIV Hotspots"],
-    imageUrl: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80",
+    href: "/about",
+    title: "About",
+    description: "Research biography, teaching, and professional background.",
   },
   {
-    title: "Spatial variability in HIV prevalence declines in several countries in sub-Saharan Africa",
-    authors: "Cuadros D.F., Abu-Raddad L.J.",
-    journal: "Health & Place",
-    year: 2014,
-    tags: ["HIV Hotspots"],
-    imageUrl: "https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?w=800&q=80",
+    href: "/research",
+    title: "Research",
+    description: "Core themes, projects, grants, and team.",
   },
   {
-    title: "Beyond HIV prevalence: identifying people living with HIV within underserved areas in South Africa",
-    authors: "Kim H., Tanser F., Tomita A., Vandormael A., Cuadros D.F.",
-    journal: "BMJ Global Health",
-    year: 2021,
-    tags: ["HIV Hotspots"],
-    imageUrl: "https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?w=800&q=80",
+    href: "/publications",
+    title: "Publications",
+    description: "Peer-reviewed papers and selected research output.",
   },
   {
-    title: "The role of high-risk geographies in the perpetuation of the HIV epidemic in rural South Africa: a spatial molecular epidemiology study",
-    authors: "Cuadros D.F., de Oliveira T., Gräf T., Junqueira D.M., et al.",
-    journal: "PLOS Global Public Health",
-    year: 2022,
-    tags: ["HIV Hotspots"],
-    imageUrl: "https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?w=800&q=80",
-  },
-
-  // 2. HIV Care Access
-  {
-    title: "Assessing regional variations and sociodemographic barriers in the progress toward UNAIDS 95-95-95 targets in Zimbabwe",
-    authors: "Chowdhury M.D.T., Bershteyn A., Milali M., Citron D.T., Nyimbili S., Musuka G., Cuadros D.F.",
-    journal: "Communications Medicine",
-    year: 2025,
-    tags: ["HIV Care Access"],
-    imageUrl: "https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?w=800&q=80",
+    href: "/teaching-mentoring",
+    title: "Teaching & Mentoring",
+    description: "Courses taught and mentoring opportunities.",
   },
   {
-    title: "District-level treatment cascade bottlenecks towards UNAIDS HIV 95-95-95 targets",
-    authors: "Cuadros D.F., et al.",
-    journal: "Lancet HIV",
-    year: 2024,
-    tags: ["HIV Care Access"],
-    imageUrl: "https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?w=800&q=80",
-  },
-
-  // 3. HIV Co-infections  
-  {
-    title: "From individuals to populations: Immunological and epidemiological significance of co-infection in the dynamics of HIV",
-    authors: "Cuadros D.F., Abu-Raddad L.J.",
-    journal: "Journal of Clinical & Cellular Immunology",
-    year: 2012,
-    tags: ["HIV Co-infections"],
-    imageUrl: "https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?w=800&q=80",
+    href: "/media-talks",
+    title: "Media & Talks",
+    description: "Interviews, talks, and policy-facing contributions.",
   },
   {
-    title: "Convergence of HIV and non-communicable disease epidemics: geospatial mapping of the unmet health needs in an HIV hyperendemic community in South Africa",
-    authors: "Cuadros D.F., Devi C., Singh U., et al.",
-    journal: "BMJ Global Health",
-    year: 2024,
-    tags: ["HIV Co-infections"],
-    imageUrl: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80",
-  },
-
-  // 4. Male Circumcision
-  {
-    title: "Are geographical 'cold spots' of male circumcision driving differential HIV dynamics in Tanzania?",
-    authors: "Cuadros D.F., Branscum A.J., Miller F.D., Awad S.F., Abu-Raddad L.J.",
-    journal: "Frontiers in Public Health",
-    year: 2015,
-    tags: ["Male Circumcision"],
-    imageUrl: "https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?w=800&q=80",
-  },
-
-  // 5. COVID-19 Transmission
-  {
-    title: "Quantifying early COVID-19 outbreak transmission in South Africa and exploring vaccine efficacy scenarios",
-    authors: "Mukandavire Z., Nyabadza F., Malunguza N.J., Cuadros D.F., et al.",
-    journal: "PLOS ONE",
-    year: 2020,
-    tags: ["COVID-19 Transmission"],
-    imageUrl: "https://images.unsplash.com/photo-1587854692152-cbe660dbde88?w=800&q=80",
-  },
-  {
-    title: "Dynamics of the COVID-19 epidemic in urban and rural areas in the United States",
-    authors: "Cuadros D.F., Branscum A.J., Mukandavire Z., Miller F.D., MacKinnon N.J.",
-    journal: "Annals of Epidemiology",
-    year: 2021,
-    tags: ["COVID-19 Transmission"],
-    imageUrl: "https://images.unsplash.com/photo-1587854692152-cbe660dbde88?w=800&q=80",
-  },
-
-  // 6. COVID-19 Vaccination
-  {
-    title: "Association between vaccination coverage disparity and the dynamics of the COVID-19 Delta and Omicron waves in the US",
-    authors: "Cuadros D.F., Moreno C.M., Musuka G., et al.",
-    journal: "Frontiers in Medicine",
-    year: 2022,
-    tags: ["COVID-19 Vaccination"],
-    imageUrl: "https://images.unsplash.com/photo-1587854692152-cbe660dbde88?w=800&q=80",
-  },
-  {
-    title: "Mapping Structural Barriers: A Geospatial Assessment of COVID-19 Vaccine Inequities in Kenya",
-    authors: "Niño L., Kiragga A., Miller F.D., Mwalili S.M., Musuka G., Cuadros D.F.",
-    journal: "medRxiv (Preprint)",
-    year: 2025,
-    tags: ["COVID-19 Vaccination"],
-    imageUrl: "https://images.unsplash.com/photo-1587854692152-cbe660dbde88?w=800&q=80",
-  },
-
-  // 7. COVID-19 Capacity
-  {
-    title: "Projected ICU surge demands during early COVID-19 hotspots in the United States",
-    authors: "Cuadros D.F., et al.",
-    journal: "Health & Place",
-    year: 2020,
-    tags: ["COVID-19 Capacity"],
-    imageUrl: "https://images.unsplash.com/photo-1628771062401-644a49d3a7e2?w=800&q=80",
-  },
-
-  // 8. Substance Use
-  {
-    title: "Spatiotemporal analysis of substance use disorder mortality in the United States: an observational study of emerging hotspots and vulnerable populations (2005–2020)",
-    authors: "Escobar S., MacKinnon N.J., Ambade P., Hoffman Z., Cuadros D.F.",
-    journal: "Lancet Regional Health – Americas",
-    year: 2025,
-    tags: ["Substance Use"],
-    imageUrl: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=800&q=80",
-  },
-  {
-    title: "Shifting opioid overdose mortality hotspots in Ohio: a spatiotemporal analysis",
-    authors: "Hernandez A., Cuadros D.F., et al.",
-    journal: "Scientific Reports",
-    year: 2020,
-    tags: ["Substance Use"],
-    imageUrl: "https://images.unsplash.com/photo-1606318601954-b9d7c34c8b22?w=800&q=80",
-  },
-
-  // 9. Hepatitis
-  {
-    title: "Spatial epidemiology of hepatitis C virus infection in Egypt: analyses and implications",
-    authors: "Cuadros D.F., Branscum A.J., Miller F.D., Abu-Raddad L.J.",
-    journal: "Hepatology",
-    year: 2014,
-    tags: ["Hepatitis"],
-    imageUrl: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&q=80",
-  },
-
-  // 10. Spatial Methods
-  {
-    title: "Spatial epidemiology of diabetes: Methods and insights",
-    authors: "Cuadros D.F., Li J., Musuka G., Awad S.F.",
-    journal: "World Journal of Diabetes",
-    year: 2021,
-    tags: ["Spatial Methods"],
-    imageUrl: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80",
-  },
-  {
-    title: "Wastewater-based epidemiology: spatial modeling and public health implications for SARS-CoV-2 and other enteric viruses",
-    authors: "Cuadros D.F., et al.",
-    journal: "Pathogens",
-    year: 2024,
-    tags: ["Spatial Methods"],
-    imageUrl: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&q=80",
+    href: "/contact",
+    title: "Contact",
+    description: "Request a collaboration, talk, or advisory conversation.",
   },
 ]
+
+const publicationIndex = allPublications.map(({ title, authors, journal, year }) => ({
+  title,
+  authors,
+  journal,
+  year,
+}))
 
 export function SiteSearch() {
   const [open, setOpen] = React.useState(false)
@@ -195,7 +61,7 @@ export function SiteSearch() {
     const down = (e: KeyboardEvent) => {
       if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
         e.preventDefault()
-        setOpen((open) => !open)
+        setOpen((current) => !current)
       }
     }
 
@@ -221,18 +87,37 @@ export function SiteSearch() {
         </kbd>
       </button>
       <CommandDialog open={open} onOpenChange={setOpen}>
-        <CommandInput placeholder="Type a command or search..." />
+        <CommandInput placeholder="Type a keyword, page, or publication title..." />
         <CommandList>
           <CommandEmpty>No results found.</CommandEmpty>
-          <CommandGroup heading="Publications">
-            {publications.map((pub) => (
+          <CommandGroup heading="Pages">
+            {quickLinks.map((link) => (
               <CommandItem
-                key={pub.title}
-                onSelect={() => handleSelect(`/publications`)}
-                value={pub.title}
+                key={link.href}
+                value={link.title}
+                onSelect={() => handleSelect(link.href)}
               >
                 <BookOpen className="mr-2 h-4 w-4" />
-                <span>{pub.title}</span>
+                <div className="flex flex-col">
+                  <span>{link.title}</span>
+                  <span className="text-xs text-muted-foreground">{link.description}</span>
+                </div>
+              </CommandItem>
+            ))}
+          </CommandGroup>
+          <CommandGroup heading="Publications">
+            {publicationIndex.map((pub) => (
+              <CommandItem
+                key={pub.title}
+                value={pub.title}
+                onSelect={() => handleSelect(`/publications?query=${encodeURIComponent(pub.title)}`)}
+              >
+                <BookOpen className="mr-2 h-4 w-4" />
+                <div className="flex flex-col">
+                  <span>{pub.title}</span>
+                  <span className="text-xs text-muted-foreground">{pub.authors} ({pub.year})</span>
+                  <span className="text-xs text-muted-foreground">{pub.journal}</span>
+                </div>
               </CommandItem>
             ))}
           </CommandGroup>
@@ -240,4 +125,8 @@ export function SiteSearch() {
       </CommandDialog>
     </>
   )
-} 
+}
+
+
+
+

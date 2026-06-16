@@ -1,212 +1,32 @@
-"use client"
+﻿"use client"
 
-import { Users, GraduationCap, BookOpen, Award, ChevronDown, ChevronRight, Calendar, MapPin, ExternalLink } from "lucide-react"
+import { Users, GraduationCap, BookOpen, Award, ChevronDown, ChevronRight, Calendar, MapPin, ExternalLink, type LucideIcon } from "lucide-react"
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
+import { labData, type LabSection, type LabSectionIconKey } from "@/data/labMembers"
 
-interface Student {
-  name: string
-  period: string
-  department?: string
-  university?: string
-  researchInterests?: string
-  dissertation?: string
-  thesis?: string
-  focus?: string
-  status?: string
+const labSectionIconMap: Record<LabSectionIconKey, LucideIcon> = {
+  graduationCap: GraduationCap,
+  users: Users,
+  award: Award,
+  bookOpen: BookOpen,
 }
 
-interface Section {
-  id: string
-  title: string
-  icon: React.ElementType
-  students: Student[]
-  color: string
-  description?: string
-}
+function CollapsibleSection({
+  section,
+  isOpen,
+  onToggle,
+}: {
+  section: LabSection
+  isOpen: boolean
+  onToggle: () => void
+}) {
+  const Icon = labSectionIconMap[section.icon]
 
-const labData: Section[] = [
-  {
-    id: "current-phd-advisees",
-    title: "Current PhD Advisees",
-    icon: GraduationCap,
-    color: "bg-gradient-to-r from-slate-700 via-slate-800 to-slate-900",
-    description: "Doctoral students under direct supervision",
-    students: [
-      {
-        name: "Tuhin Chowdhury",
-        period: "2023–present",
-        department: "Department of Geography",
-        university: "University of Cincinnati",
-        researchInterests: "Spatial epidemiology, GIS applications in public health"
-      },
-      {
-        name: "Joseph Okebugwu",
-        period: "2023–present",
-        department: "Department of Geography",
-        university: "University of Cincinnati",
-        focus: "Information not publicly available"
-      },
-      {
-        name: "Tolulope Adedoyin",
-        period: "2024–present",
-        department: "Department of Geography",
-        university: "University of Cincinnati",
-        researchInterests: "Health geography, spatial epidemiology, disease ecology, and modeling"
-      },
-      {
-        name: "Le Tu",
-        period: "2024–present",
-        department: "Department of Geography",
-        university: "University of Cincinnati",
-        focus: "Information not publicly available"
-      }
-    ]
-  },
-  {
-    id: "current-committee",
-    title: "Current PhD Committee Members",
-    icon: Users,
-    color: "bg-gradient-to-r from-stone-600 via-stone-700 to-stone-800",
-    description: "Doctoral students on dissertation committees",
-    students: [
-      {
-        name: "Lora Newman",
-        period: "2022–present",
-        department: "Department of Mathematics",
-        university: "University of Cincinnati",
-        status: "PhD Candidate",
-        focus: "Information not publicly available"
-      },
-      {
-        name: "Xin Gu",
-        period: "2021–present",
-        department: "Department of Geography",
-        university: "University of Cincinnati",
-        status: "PhD Candidate",
-        focus: "Information not publicly available"
-      }
-    ]
-  },
-  {
-    id: "former-phd-advisees",
-    title: "Former PhD Advisees",
-    icon: Award,
-    color: "bg-gradient-to-r from-zinc-600 via-zinc-700 to-zinc-800",
-    description: "Successfully graduated doctoral students",
-    students: [
-      {
-        name: "Andres Hernandez",
-        period: "2017–2020",
-        department: "Department of Geography",
-        university: "University of Cincinnati",
-        dissertation: "Spatial Modeling of the Social Health Determinants Impact on the Epidemiology of Diseases in Low-, Middle-, and High-income Settings."
-      },
-      {
-        name: "Hana Kim",
-        period: "2018–2021",
-        department: "Department of Geography",
-        university: "University of Cincinnati",
-        dissertation: "Spatial Surveillance of Infectious Disease Intervention with Related Factors for a Population Living in Underserved Areas."
-      },
-      {
-        name: "Esteban Correa",
-        period: "2018–2021",
-        department: "Department of Geography",
-        university: "University of Cincinnati",
-        dissertation: "Medical Geography in Vulnerable Groups."
-      }
-    ]
-  },
-  {
-    id: "former-ma-advisees",
-    title: "Former MA Advisees",
-    icon: BookOpen,
-    color: "bg-gradient-to-r from-gray-600 via-gray-700 to-gray-800",
-    description: "Successfully graduated master's students",
-    students: [
-      {
-        name: "Tuhin Chowdhury",
-        period: "2021–2023",
-        department: "Department of Geography",
-        university: "University of Cincinnati"
-      },
-      {
-        name: "Santiago Escobar",
-        period: "2022–2024",
-        department: "Department of Geography",
-        university: "University of Cincinnati",
-        thesis: "Mapping the Waves: Spatiotemporal Dynamics and Disparities in Substance Use Disorder Mortality Across the United States."
-      },
-      {
-        name: "Chayanika Devi",
-        period: "2022–2024",
-        department: "Department of Geography",
-        university: "University of Cincinnati",
-        thesis: "Understanding Spatio-temporal Patterns of COVID-19 in the United States."
-      }
-    ]
-  },
-  {
-    id: "former-phd-committee",
-    title: "Former PhD Committee Members",
-    icon: Users,
-    color: "bg-gradient-to-r from-neutral-600 via-neutral-700 to-neutral-800",
-    description: "Previously served on dissertation committees",
-    students: [
-      {
-        name: "Jingjing Li",
-        period: "2017–2020",
-        department: "Department of Geography",
-        university: "University of Cincinnati",
-        dissertation: "Information not publicly available"
-      },
-      {
-        name: "Minxuan Lan",
-        period: "2017–2020",
-        department: "Department of Geography",
-        university: "University of Cincinnati",
-        dissertation: "Information not publicly available"
-      },
-      {
-        name: "Zahra Almarhoon",
-        period: "2018–2020",
-        department: "James L. Winkle College of Pharmacy",
-        university: "University of Cincinnati"
-      },
-      {
-        name: "Mohammed Alsultan",
-        period: "2020–2022",
-        department: "James L. Winkle College of Pharmacy",
-        university: "University of Cincinnati",
-        dissertation: "Information not publicly available"
-      }
-    ]
-  },
-  {
-    id: "former-ma-committee",
-    title: "Former MA Committee Members",
-    icon: BookOpen,
-    color: "bg-gradient-to-r from-slate-600 via-slate-700 to-slate-800",
-    description: "Previously served on master's thesis committees",
-    students: [
-      {
-        name: "Yang Liu",
-        period: "2017–2018",
-        department: "Department of Geography",
-        university: "University of Cincinnati"
-      }
-    ]
-  }
-]
-
-function CollapsibleSection({ section }: { section: Section }) {
-  const [isOpen, setIsOpen] = useState(section.id === "current-phd-advisees")
-  
   return (
     <Card className="overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 border-0">
       <CardHeader 
@@ -214,11 +34,11 @@ function CollapsibleSection({ section }: { section: Section }) {
           "cursor-pointer transition-all duration-300 hover:opacity-90",
           section.color
         )}
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={onToggle}
       >
         <div className="flex items-center justify-between text-white">
           <div className="flex items-center space-x-3">
-            <section.icon className="h-6 w-6" />
+            <Icon className="h-6 w-6" />
             <div>
               <CardTitle className="text-lg font-sans">{section.title}</CardTitle>
               {section.description && (
@@ -329,7 +149,9 @@ function CollapsibleSection({ section }: { section: Section }) {
 
 export default function LabMembersPage() {
   const [searchTerm, setSearchTerm] = useState("")
-  const [expandAll, setExpandAll] = useState(false)
+  const [openSections, setOpenSections] = useState<Record<string, boolean>>(
+    () => Object.fromEntries(labData.map((section) => [section.id, section.id === "current-phd-advisees"]))
+  )
   
   const filteredData = labData.map(section => ({
     ...section,
@@ -342,6 +164,17 @@ export default function LabMembersPage() {
   
   const totalStudents = labData.reduce((acc, section) => acc + section.students.length, 0)
   const currentStudents = labData.slice(0, 2).reduce((acc, section) => acc + section.students.length, 0)
+  const displayedData = searchTerm ? filteredData : labData
+  const allDisplayedOpen = displayedData.length > 0 && displayedData.every((section) => openSections[section.id])
+
+  const toggleDisplayedSections = () => {
+    const nextOpenState = !allDisplayedOpen
+
+    setOpenSections((current) => ({
+      ...current,
+      ...Object.fromEntries(displayedData.map((section) => [section.id, nextOpenState])),
+    }))
+  }
   
   return (
     <>
@@ -357,7 +190,6 @@ export default function LabMembersPage() {
         </div>
       </div>
       
-      {/* Statistics Overview */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
         <Card className="border-l-4 border-l-indigo-500 bg-gradient-to-r from-indigo-50 to-purple-50 dark:from-indigo-950/20 dark:to-purple-950/20">
           <CardContent className="p-4">
@@ -396,7 +228,6 @@ export default function LabMembersPage() {
         </Card>
       </div>
       
-      {/* Search and Controls */}
       <div className="flex flex-col md:flex-row gap-4 mb-8">
         <div className="flex-1">
           <input
@@ -409,17 +240,26 @@ export default function LabMembersPage() {
         </div>
         <Button
           variant="outline"
-          onClick={() => setExpandAll(!expandAll)}
+          onClick={toggleDisplayedSections}
           className="whitespace-nowrap"
         >
-          {expandAll ? "Collapse All" : "Expand All"}
+          {allDisplayedOpen ? "Collapse All" : "Expand All"}
         </Button>
       </div>
       
-      {/* Lab Sections */}
       <div className="space-y-6">
-        {(searchTerm ? filteredData : labData).map((section) => (
-          <CollapsibleSection key={section.id} section={section} />
+        {displayedData.map((section) => (
+          <CollapsibleSection
+            key={section.id}
+            section={section}
+            isOpen={Boolean(openSections[section.id])}
+            onToggle={() =>
+              setOpenSections((current) => ({
+                ...current,
+                [section.id]: !current[section.id],
+              }))
+            }
+          />
         ))}
       </div>
       
@@ -432,7 +272,6 @@ export default function LabMembersPage() {
         </div>
       )}
       
-      {/* Call to Action */}
       <Card className="mt-12 bg-gradient-to-r from-teal-50 to-blue-50 dark:from-teal-950/20 dark:to-blue-950/20 border-0">
         <CardContent className="p-8 text-center">
           <h3 className="text-xl font-bold font-sans text-deep-navy-900 dark:text-site-white mb-4">

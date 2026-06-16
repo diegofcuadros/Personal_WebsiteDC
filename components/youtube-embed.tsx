@@ -1,18 +1,18 @@
 interface YouTubeEmbedProps {
-  videoId: string;
-  width?: string | number;
-  height?: string | number;
-  title?: string;
-  className?: string;
+  videoId: string
+  width?: string | number
+  height?: string | number
+  title?: string
+  className?: string
 }
 
-const YouTubeEmbed: React.FC<YouTubeEmbedProps> = ({
+export default function YouTubeEmbed({
   videoId,
   width = "100%",
   height = "315",
   title = "YouTube video player",
-  className = ""
-}) => {
+  className = "",
+}: YouTubeEmbedProps) {
   return (
     <div className={`aspect-w-16 aspect-h-9 ${className}`}>
       <iframe
@@ -28,7 +28,5 @@ const YouTubeEmbed: React.FC<YouTubeEmbedProps> = ({
         className="w-full h-full"
       ></iframe>
     </div>
-  );
-};
-
-export default YouTubeEmbed;
+  )
+}

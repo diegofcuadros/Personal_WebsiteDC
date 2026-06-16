@@ -1,4 +1,4 @@
-import Link from "next/link"
+﻿import Link from "next/link"
 import Image from "next/image"
 import { Linkedin, Mail, BookText, Award, Users } from "lucide-react"
 
@@ -10,11 +10,17 @@ const socialLinks = [
   { name: "Digital Epi Lab", href: "https://ucdigitalfutures.com/digital-epidemiology-lab/", icon: Users },
 ]
 
-const footerNavLinks = [
+const quickLinks = [
   { href: "/about", label: "About" },
   { href: "/research", label: "Research" },
   { href: "/publications", label: "Publications" },
   { href: "/contact", label: "Contact" },
+]
+
+const showAdminLink = process.env.NEXT_PUBLIC_SHOW_ADMIN_LINK === "true" || process.env.NODE_ENV === "development"
+const footerQuickLinks = showAdminLink ? [...quickLinks, { href: "/admin", label: "Admin (Internal)" }] : quickLinks
+
+const legalLinks = [
   { href: "/terms", label: "Terms" },
   { href: "/privacy", label: "Privacy" },
 ]
@@ -39,12 +45,12 @@ export default function SiteFooter() {
           <div>
             <h5 className="font-semibold text-site-white mb-3">Quick Links</h5>
             <ul className="space-y-2">
-              {footerNavLinks.slice(0, 4).map((link) => (
-                <li key={link.label}>
-                  <Link href={link.href} className="hover:text-vibrant-gold transition-colors text-sm">
-                    {link.label}
-                  </Link>
-                </li>
+            {footerQuickLinks.map((link) => (
+              <li key={link.label}>
+                <Link href={link.href} className="hover:text-vibrant-gold transition-colors text-sm">
+                  {link.label}
+                </Link>
+              </li>
               ))}
             </ul>
           </div>
@@ -52,7 +58,7 @@ export default function SiteFooter() {
           <div>
             <h5 className="font-semibold text-site-white mb-3">Legal</h5>
             <ul className="space-y-2">
-              {footerNavLinks.slice(4).map((link) => (
+              {legalLinks.map((link) => (
                 <li key={link.label}>
                   <Link href={link.href} className="hover:text-vibrant-gold transition-colors text-sm">
                     {link.label}
@@ -105,3 +111,5 @@ export default function SiteFooter() {
     </footer>
   )
 }
+
+

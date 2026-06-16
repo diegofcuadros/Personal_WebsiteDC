@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import Link from "next/link"
 import Logo from "./logo"
@@ -18,6 +18,7 @@ import {
   Home,
   Globe,
   Users,
+  ShieldCheck,
 } from "lucide-react"
 import {
   NavigationMenu,
@@ -43,6 +44,8 @@ interface NavLink {
   }[]
 }
 
+const showAdminLink = process.env.NEXT_PUBLIC_SHOW_ADMIN_LINK === "true" || process.env.NODE_ENV === "development"
+
 const navLinks: NavLink[] = [
   { href: "/", label: "Home", icon: Home },
   { href: "/about", label: "About", icon: Info },
@@ -53,18 +56,18 @@ const navLinks: NavLink[] = [
     icon: Microscope,
     subLinks: [
       { href: "/research/themes", title: "Research Themes", description: "Core areas of investigation." },
-      { href: "/research/projects", title: "Projects", description: "Detailed ongoing and past projects." },
-      { href: "/research/grants", title: "Grants & Funding", description: "Secured funding for our work." },
-      { href: "/research/lab-members", title: "Lab Members & Openings", description: "Meet the team and join us." },
+      { href: "/research/projects", title: "Projects", description: "Selected ongoing and past research." },
+      { href: "/research/grants", title: "Grants & Funding", description: "Funded research portfolio." },
+      { href: "/research/lab-members", title: "Lab Members & Mentoring", description: "People, mentoring, and graduate research." },
     ],
   },
   { href: "/publications", label: "Publications", icon: BookOpen },
-  { href: "/expertise-services", label: "Expertise", icon: GraduationCap },
+  { href: "/expertise-services", label: "Collaborate", icon: GraduationCap },
   { href: "/teaching-mentoring", label: "Teaching", icon: Presentation },
   { href: "/media-talks", label: "Media & Talks", icon: Mic },
   { href: "/contact", label: "Contact", icon: Mail },
-  // Add other links here if needed
-];
+  ...(showAdminLink ? [{ href: "/admin", label: "Admin", icon: ShieldCheck }] : []),
+]
 
 export default function SiteHeaderNew() {
   const [open, setOpen] = React.useState(false)
@@ -175,3 +178,5 @@ const ListItem = React.forwardRef<React.ElementRef<"a">, React.ComponentPropsWit
   },
 )
 ListItem.displayName = "ListItem" 
+
+

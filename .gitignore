@@ -25,3 +25,11 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# local development artifacts
+*.log
+*.err
+/dev_server_3000.*
+/next-dev.*
+/simple_server_*.txt
+/tmp_*

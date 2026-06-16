@@ -2,8 +2,6 @@
 
 import { motion } from "framer-motion"
 import { useScrollAnimation } from "@/hooks/use-scroll-animation"
-import { Briefcase } from "lucide-react"
-import { cn } from "@/lib/utils"
 
 interface TimelineEvent {
   role: string

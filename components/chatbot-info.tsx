@@ -48,7 +48,7 @@ export default function ChatbotInfo() {
               <MessageCircle className="h-3 w-3 mr-1" />
               Expertise
             </Badge>
-            <span className="text-sm">Discover consulting services</span>
+            <span className="text-sm">Explore collaboration areas</span>
           </div>
         </div>
         

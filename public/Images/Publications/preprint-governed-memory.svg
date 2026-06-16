@@ -1,0 +1,97 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
+  <title id="title">Governed collaborative memory in AI agent systems</title>
+  <desc id="desc">Abstract publication artwork showing linked agents, a governed memory archive, and a selection filter.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#07151f"/>
+      <stop offset="0.52" stop-color="#0e2a31"/>
+      <stop offset="1" stop-color="#f0b35b"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="42%" cy="35%" r="58%">
+      <stop offset="0" stop-color="#7ee4c3" stop-opacity="0.38"/>
+      <stop offset="0.58" stop-color="#7ee4c3" stop-opacity="0.08"/>
+      <stop offset="1" stop-color="#7ee4c3" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="ledger" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#dff8ee" stop-opacity="0.96"/>
+      <stop offset="1" stop-color="#8fd8bc" stop-opacity="0.70"/>
+    </linearGradient>
+    <linearGradient id="amber" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f8d28b"/>
+      <stop offset="1" stop-color="#d8793c"/>
+    </linearGradient>
+    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="18" stdDeviation="22" flood-color="#031016" flood-opacity="0.40"/>
+    </filter>
+    <filter id="grain">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+      <feComponentTransfer>
+        <feFuncA type="table" tableValues="0 0.08"/>
+      </feComponentTransfer>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="800" fill="url(#bg)"/>
+  <rect width="1200" height="800" fill="url(#glow)"/>
+  <rect width="1200" height="800" filter="url(#grain)" opacity="0.35"/>
+
+  <path d="M92 620 C260 535 323 455 489 482 C654 509 708 642 913 566 C1000 534 1077 489 1141 436" fill="none" stroke="#f7d59a" stroke-opacity="0.22" stroke-width="2"/>
+  <path d="M75 188 C235 250 349 151 494 229 C669 323 740 268 860 197 C955 142 1040 132 1145 172" fill="none" stroke="#7ee4c3" stroke-opacity="0.20" stroke-width="2"/>
+
+  <g filter="url(#softShadow)">
+    <rect x="383" y="173" width="438" height="454" rx="38" fill="#0b2229" stroke="#c7f2e1" stroke-opacity="0.28"/>
+    <rect x="414" y="210" width="376" height="58" rx="18" fill="url(#ledger)" opacity="0.96"/>
+    <rect x="414" y="287" width="376" height="58" rx="18" fill="url(#ledger)" opacity="0.76"/>
+    <rect x="414" y="364" width="376" height="58" rx="18" fill="url(#ledger)" opacity="0.60"/>
+    <rect x="414" y="441" width="376" height="58" rx="18" fill="url(#ledger)" opacity="0.42"/>
+    <rect x="414" y="518" width="248" height="58" rx="18" fill="url(#amber)" opacity="0.94"/>
+    <circle cx="744" cy="547" r="32" fill="#0b2229" stroke="#f8d28b" stroke-width="5"/>
+    <path d="M730 547 L741 558 L760 533" fill="none" stroke="#f8d28b" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <g stroke-linecap="round" stroke-linejoin="round">
+    <path d="M243 250 L414 239" stroke="#dff8ee" stroke-opacity="0.45" stroke-width="4"/>
+    <path d="M247 543 L414 547" stroke="#dff8ee" stroke-opacity="0.36" stroke-width="4"/>
+    <path d="M957 249 L790 239" stroke="#dff8ee" stroke-opacity="0.45" stroke-width="4"/>
+    <path d="M961 543 L790 547" stroke="#f8d28b" stroke-opacity="0.55" stroke-width="4"/>
+    <path d="M604 113 L604 210" stroke="#7ee4c3" stroke-opacity="0.45" stroke-width="4"/>
+    <path d="M604 690 L604 576" stroke="#f8d28b" stroke-opacity="0.55" stroke-width="4"/>
+  </g>
+
+  <g>
+    <circle cx="243" cy="250" r="58" fill="#123743" stroke="#7ee4c3" stroke-width="3"/>
+    <circle cx="247" cy="543" r="58" fill="#123743" stroke="#7ee4c3" stroke-width="3"/>
+    <circle cx="957" cy="249" r="58" fill="#123743" stroke="#7ee4c3" stroke-width="3"/>
+    <circle cx="961" cy="543" r="58" fill="#3c2b20" stroke="#f8d28b" stroke-width="3"/>
+    <circle cx="604" cy="113" r="48" fill="#123743" stroke="#7ee4c3" stroke-width="3"/>
+    <circle cx="604" cy="690" r="48" fill="#3c2b20" stroke="#f8d28b" stroke-width="3"/>
+
+    <g fill="none" stroke-width="4" opacity="0.92">
+      <path d="M220 252 C220 232 266 232 266 252 C266 272 220 272 220 252 Z" stroke="#dff8ee"/>
+      <path d="M224 526 L270 526 L270 560 L224 560 Z M235 537 L259 537" stroke="#dff8ee"/>
+      <path d="M935 228 L979 250 L935 272 Z" stroke="#dff8ee"/>
+      <path d="M941 566 C951 526 971 526 981 566" stroke="#f8d28b"/>
+      <path d="M586 96 L622 96 L622 130 L586 130 Z M594 104 L614 104" stroke="#dff8ee"/>
+      <path d="M583 690 L604 669 L625 690 L604 711 Z" stroke="#f8d28b"/>
+    </g>
+  </g>
+
+  <g opacity="0.82">
+    <path d="M862 166 C914 225 940 298 940 384 C940 500 892 601 813 665" fill="none" stroke="#f8d28b" stroke-opacity="0.30" stroke-width="10" stroke-linecap="round"/>
+    <path d="M846 180 C895 235 920 304 920 384 C920 490 876 584 804 643" fill="none" stroke="#f8d28b" stroke-opacity="0.72" stroke-width="3" stroke-linecap="round" stroke-dasharray="16 20"/>
+    <circle cx="900" cy="392" r="16" fill="#f8d28b"/>
+    <circle cx="884" cy="466" r="10" fill="#f8d28b" opacity="0.72"/>
+    <circle cx="870" cy="308" r="10" fill="#f8d28b" opacity="0.72"/>
+  </g>
+
+  <g opacity="0.42" fill="#dff8ee">
+    <circle cx="155" cy="130" r="5"/>
+    <circle cx="184" cy="160" r="3"/>
+    <circle cx="1042" cy="680" r="4"/>
+    <circle cx="1088" cy="634" r="6"/>
+    <circle cx="1052" cy="112" r="3"/>
+    <circle cx="1130" cy="250" r="4"/>
+    <circle cx="91" cy="469" r="4"/>
+  </g>
+</svg>

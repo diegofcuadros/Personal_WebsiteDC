@@ -61,7 +61,7 @@ const studyLocations = {
     { id: 9, position: [39, -98] as LatLngExpression, title: "COVID urban-rural dynamics", year: 2021, journal: "Annals of Epidemiology", location: "United States" }
   ],
   "substance-theme": [
-    { id: 8, position: [39, -98] as LatLngExpression, title: "Substance use disorder evolution", year: 2024, journal: "Nature Medicine", location: "United States" }
+    { id: 8, position: [39, -98] as LatLngExpression, title: "Substance use disorder evolution", year: 2025, journal: "The Lancet Regional Health - Americas", location: "United States" }
   ],
   "infectious-theme": [
     { id: 10, position: [-12, -77] as LatLngExpression, title: "Prison TB transmission (Peru)", year: 2024, journal: "Lancet Regional Health", location: "Peru" },
@@ -75,7 +75,7 @@ const studyLocations = {
     { id: 20, position: [-18, 31] as LatLngExpression, title: "Intimate partner violence & HIV", year: 2023, journal: "BMJ Global Health", location: "Zimbabwe" }
   ],
   "methods-theme": [
-    { id: 18, position: [30, 0] as LatLngExpression, title: "GeoAI for public health review", year: 2023, journal: "Annals of GIS", location: "Global (Methods)" }
+    { id: 18, position: [30, 0] as LatLngExpression, title: "AI-enabled public health decision support", year: 2023, journal: "Annals of GIS", location: "Global (Methods)" }
   ]
 }
 
@@ -184,7 +184,7 @@ const storyChapters = [
     icon: Globe,
     color: "bg-indigo-50 dark:bg-indigo-900/20 border-indigo-200 dark:border-indigo-800",
     regions: "Global",
-    keyInsight: "GeoAI integration roadmap for next-generation surveillance"
+    keyInsight: "AI-human interaction and decision-support roadmap for next-generation surveillance"
   },
   {
     id: "closing",
@@ -903,7 +903,7 @@ function ChapterContent({
                     "The burden of non-communicable diseases (NCDs) and their social determinants varies significantly by place. This research uncovers the geographic nexus of issues like food insecurity, mental health, and access to care for chronic conditions. These studies from India and South Africa highlight how mapping social and environmental factors is critical for designing equitable health systems."
                   }
                   {chapter.theme === "Methods" && 
-                    "Advancing global health requires continuous innovation in our analytical tools. This work focuses on developing next-generation spatial methods, including integrating artificial intelligence with geographic data (GeoAI) to create more powerful predictive models and surveillance systems that can anticipate and respond to health crises more effectively."
+                    "Advancing global health requires continuous innovation in analytical tools and human-centered AI design. This work focuses on AI-human interaction, agent oversight, interpretation, trust, and decision support for surveillance systems."
                   }
                 </p>
               </div>
@@ -946,7 +946,7 @@ function ChapterContent({
                         <>
                           <li className="flex items-start gap-2">
                             <span className="text-teal-600 font-bold">•</span>
-                            <span>15-year national overdose evolution mapping (Nature Medicine)</span>
+                            <span>15-year national overdose evolution mapping (The Lancet Regional Health - Americas)</span>
                           </li>
                           <li className="flex items-start gap-2">
                             <span className="text-teal-600 font-bold">•</span>
@@ -982,7 +982,7 @@ function ChapterContent({
                         <>
                           <li className="flex items-start gap-2">
                             <span className="text-teal-600 font-bold">•</span>
-                            <span>GeoAI integration roadmap for public health surveillance</span>
+                            <span>AI-human interaction roadmap for public health surveillance</span>
                           </li>
                           <li className="flex items-start gap-2">
                             <span className="text-teal-600 font-bold">•</span>
@@ -1029,7 +1029,7 @@ function ChapterContent({
                     <Lightbulb className="h-8 w-8 text-teal-600 dark:text-teal-400 mx-auto" />
                     <h4 className="font-semibold text-slate-900 dark:text-slate-100">Future Direction</h4>
                     <p className="text-xs text-slate-600 dark:text-slate-300">
-                      Pioneering GeoAI methods to build predictive models for future health crises.
+                      Pioneering AI-human interaction methods for future health decision support.
                     </p>
                   </div>
                 </div>
